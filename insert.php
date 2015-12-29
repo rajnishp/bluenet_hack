@@ -1,4 +1,37 @@
-<!DOCTYPE html>
+<?php
+session_start();
+$start = time() ;
+$config['host'] = "localhost" ;
+$config['user'] = "root" ;
+$config['password'] = "redhat111111" ;
+$config['database'] = "bluenethack" ;
+$db_handle = mysqli_connect($config['host'], $config['user'], $config['password'], $config['database']);
+if (mysqli_connect_errno()) {
+	echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
+if (isset($_POST['insert'])) {
+	$name = $_POST['name'];
+	$mobile = $_POST['mobile'];
+	$address = $_POST['address'];
+	$timing = $_POST['timing'];
+	$salary = $_POST['salary'];
+	$area = $_POST['area'];
+	$remarks = $_POST['remarks'];
+	$gender = $_POST['gender'];
+	$skill = count($_POST['skill']);
+	for($i=0; $i < $skill; $i++) {
+      $requirement .= ",".$_POST['skill'][$i];
+    }
+    $str2 = substr($requirement, 1); 
+	$sql = mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, expected_salary, address, area, remarks) 
+										VALUES ('$name','$mobile','$str2','$gender','$timing','$salary','$address','$area','$remarks');");
+	if(mysqli_connect_errno()){		
+	}
+	else { 
+		header("Location: insert.php"); 
+		}
+}
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,6 +42,7 @@
 </head>
 
 <body>
+	<center>
 	<div id="container" class="effect mainnav-lg">
 		
 
@@ -22,16 +56,6 @@
 				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 				<div id="page-title">
 					<h1 class="page-header text-overflow">Request</h1>
-
-					<!--Searchbox-->
-					<div class="searchbox">
-						<div class="input-group custom-search-form">
-							<input type="text" class="form-control" placeholder="Search..">
-							<span class="input-group-btn">
-								<button class="text-muted" type="button"><i class="fa fa-search"></i></button>
-							</span>
-						</div>
-					</div>
 				</div>
 				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 				<!--End page title
@@ -39,116 +63,71 @@
 
 				-->
 
-				<form class="form-horizontal" id="sr_form" onsubmit="return (validateSR());">
-
+				<form class="form-horizontal" action="" method="post">
 				    <div class="form-group">
-
 				      <label class="col-md-3 control-label">Name</label>
-
 				      <div class="col-md-3">
-				        <input type="text" id ="name" class="form-control" placeholder="Name" />
+				        <input type="text" name ="name" class="form-control" placeholder="Name" />
 				      </div> <!-- /.col -->
-
 				      <label class="col-md-1 control-label">Mobile No.</label>
-
 				      <div class="col-md-3">
-				        <input type="text" id ="Mobile" class="form-control" placeholder="Mobile" />
+				        <input type="text" name ="mobile" class="form-control" placeholder="Enter 10 digit mobile number" />
 				      </div> <!-- /.col -->
-
-
 				    </div> <!-- /.form-group -->
-
 				    <div class="form-group">
-
-				      	<label class="col-md-3 control-label">Family Members</label>
-
-				      	
-
-				      	<div class="col-md-3">
-				        	<input type="text" id ="family_members" class="form-control" placeholder="Family Members" />
+				      	<label class="col-md-3 control-label">address</label>
+							<div class="col-md-3">
+				        	<input type="text" name ="address" class="form-control" placeholder="address" />
 				      	</div> <!-- /.col -->
-
-				      	<label class="col-md-1 control-label">Working Hours</label>
-
+				      	<label class="col-md-1 control-label">Worker timings</label>
 				      	<div class="col-md-3">
-				        	<input type="text" id ="working_hours" class="form-control" placeholder="Working Hours" />
+				        	<input type="text" name ="timing" class="form-control" placeholder="Working Hours" />
 				      	</div> <!-- /.col -->
-
 				    </div> <!-- /.form-group -->
-
 				    <div class="form-group">
-
 				      	<label class="col-md-3 control-label">Requierment</label>
 				      	<div class="col-md-3">
-				        	<input type="text" id ="id_proof_id" class="form-control" placeholder="Id Proof Id" />
+				        	<input type="checkbox" name = "skill[]" data-toggle="button" value ='maid' /> Maid &nbsp;&nbsp;&nbsp;
+							<input type="checkbox" name = "skill[]" data-toggle="button" value ='cook' /> Cook &nbsp;&nbsp;&nbsp;
+							<input type="checkbox" name = "skill[]" data-toggle="button" value ='driver' /> driver <br/><br/>           
+							<input type="checkbox" name = "skill[]" data-toggle="button" value ='electrician' /> electrician &nbsp;&nbsp;&nbsp;           
+							<input type="checkbox" name = "skill[]" data-toggle="button" value ='plumber' /> Plumber &nbsp;&nbsp;&nbsp;           
+							<input type="checkbox" name = "skill[]" data-toggle="button" value ='carpenter' /> Carpenter <br/><br/>          
+							<input type="checkbox" name = "skill[]" data-toggle="button" value ='babysitter' /> Babysitter &nbsp;&nbsp;&nbsp;           
+							<input type="checkbox" name = "skill[]" data-toggle="button" value ='oldage' /> Old age care &nbsp;&nbsp;&nbsp;           
+							<input type="checkbox" name = "skill[]" data-toggle="button" value ='patient' />  Patient care &nbsp;&nbsp;&nbsp;           
 				      	</div> <!-- /.col -->
-
 				      	<label class="col-md-1 control-label">Other Specifications</label>
 				      	<div class="col-md-3">
-				        	<input type="text" id ="id_proof_id" class="form-control" placeholder="Id Proof Id" />
-				      	</div> <!-- /.col -->
-
-				    </div> <!-- /.form-group -->
-
+				        	<select name = "gender" > 
+								<option value="M" selected >Male</option>
+								<option value="F">Female</option>
+							</select>
+				      	</div>
+				    </div>
 				    <div class="form-group">
-						<label class="col-md-3 control-label">Area</label>
-						<div class="col-md-3">
-							<input type="text" id="mobile" class="form-control" placeholder="Enter 10 digit mobile number">
-						</div>
-					
-						<label class="col-md-1 control-label">Address</label>
-						<div class="col-md-3">
-							<textarea type="text" id="address" class="form-control" placeholder="Full Address" rows="4"></textarea>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label class="col-lg-3 control-label">Needed Veg/Non-veg</label>
-							<div class="col-lg-3">
-								<div class="radio">
-									<label class="form-radio form-icon">
-										<input type="radio" name="gender" value="Male"> veg
-									</label>
-
-									<label class="form-radio form-icon">
-										<input type="radio" name="gender" value="Female"> non-veg
-									</label>
-
-								</div>
-							</div>
-
-							<label class="col-lg-1 control-label">Needed Gender</label>
-							<div class="col-lg-3">
-								<div class="radio">
-									<label class="form-radio form-icon">
-										<input type="radio" name="gender" value="Male"> Male
-									</label>
-
-									<label class="form-radio form-icon">
-										<input type="radio" name="gender" value="Female"> Female
-									</label>
-
-									<label class="form-radio form-icon">
-										<input type="radio" name="gender" value="Other"> Other
-									</label>
-								</div>
-							</div>
-
-							
-						
-					</div>
-
-					
-
-					
-
+				      	<label class="col-md-3 control-label">Expected Salary</label>
+							<div class="col-md-3">
+				        	<input type="text" name ="salary" class="form-control" placeholder="Expected Salary" />
+				      	</div> <!-- /.col -->
+				      	<label class="col-md-1 control-label">Area</label>
+				      	<div class="col-md-3">
+				        	<input type="text" name ="area" class="form-control" placeholder="Area" />
+				      	</div> <!-- /.col -->
+				    </div>
+				    <div class="form-group">
+				      	<label class="col-md-3 control-label">Remarks</label>
+							<div class="col-md-3">
+				        	<input type="text" name ="remarks" class="form-control" placeholder="remarks" />
+				      	</div> <!-- /.col -->
+				    </div>
 				    <div class="form-group">
 					    <label class="col-md-3 control-label"></label>
 					    <div class="col-md-7">
-					        <button type="submit" class="btn btn-success">Submit Details</button>
+					        <button type="submit" name="insert" value="Submit">Insert</button>
 					    </div>
 				    </div> <!-- /.form-group -->
-
+				</form>
 				</div>
 			
 
@@ -219,8 +198,8 @@
 
 
 	</div>
+	</center>
 	<!--===================================================-->
 	<!-- END OF CONTAINER -->
-	
 </body>
 </html>
