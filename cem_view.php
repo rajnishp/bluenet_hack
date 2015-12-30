@@ -19,17 +19,6 @@
 			header("Location: cem_view.php"); 
 		}
 	}
-
-	if (isset($_POST['update_sr'])) {
-		$newStatus = $_POST['new_status'];
-		$match1_name = $_POST['match1_name'];
-		$match1_mobile = $_POST['match1_mobile'];
-		$match2_mobile = $_POST['match2_mobile'];
-		$match2_name = $_POST['match2_name'];
-		$sql = mysqli_query ($db_handle, "UPDATE `service_request` SET `status`= $newStatus, match_name`= $match1_name, match2_name`= $match2_name, 
-													`match_mobile`=$match_mobile, `match2_mobile`=$match2_mobile  WHERE `id` =  $sr_id ;");
-	}
-
 ?>
 
 
@@ -54,7 +43,6 @@
 		<table id="example" class="display" cellspacing="0" width="100%">
 	        <thead>
 	            <tr>
-					<th></th>
 	                <th>Name</th>
 	                <th>Mobile</th>
 	                <th>Requirement</th>
@@ -112,16 +100,17 @@
 							<button type="submit" name="update_status" class="btn btn-primary"> Update </button>
 						</form>
 	                </td>
-	                <td><button type="submit" value="update_sr" class="btn btn-primary"> Update </button></td>
+	                <td>
+						<form method="post" action="update.php">
+							<button type="submit" name="update_sr" value="<?= $srsrow['id'] ?>" class="btn btn-primary"> Update </button>
+						</form>
+					</td>
 	            </tr>
 	            <?php
 	            	}
 				?>
 	        </tbody>
     	</table>
-
-
-
 	</div>
 	<!--===================================================-->
 	<!-- END OF CONTAINER -->
