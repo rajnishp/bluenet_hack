@@ -8,8 +8,19 @@ $mysqli = new mysqli('localhost','root','redhat@11111p', 'bluenethack');
     	echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 		return 1;
 	}
+/* 
 
-$sql = "SELECT * FROM `service_request` where area = '".$area."' AND status = 'open'  LIMIT 0 , 30";
+SELECT * FROM service_request  LEFT JOIN sr_area ON service_request.id=sr_area.sr_id 
+LEFT JOIN area ON sr_area.id=area.id where area.name = 'chakkarpur' AND status = 'open'
+
+SELECT *
+FROM service_request where area = '".$area."' AND status = 'open'
+LEFT JOIN sr_area
+ON service_request.id=sr_area.sr_id LEFT JOIN area ON sr_area.id=area.id
+*/
+
+$sql = "SELECT service_request.id as id, requirements, gender, timings, expected_salary, area, date, remarks, status  FROM service_request  LEFT JOIN sr_area ON service_request.id=sr_area.sr_id 
+LEFT JOIN area ON sr_area.id=area.id where area.name = '".$area."' AND status = 'open'";
 
 $result = $mysqli->query($sql);
 
