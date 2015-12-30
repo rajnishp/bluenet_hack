@@ -20,13 +20,17 @@ ON service_request.id=sr_area.sr_id LEFT JOIN area ON sr_area.id=area.id
 */
 
 $sql = "SELECT service_request.id as id, requirements, gender, timings, expected_salary, area, date, remarks, status  FROM service_request  LEFT JOIN sr_area ON service_request.id=sr_area.sr_id 
-LEFT JOIN area ON sr_area.id=area.id where area.name = '".$area."' AND status = 'open'";
+LEFT JOIN area ON sr_area.id=area.id where  status = 'open'";
+
+if(isset($area) )
+	$sql .= " AND area.name = '".$area."'";
 
 $result = $mysqli->query($sql);
 
 
 
 $html = " 
+<p><b>".ucfirst($area)."</b> Open Request for <b>".date("Y-m-d H:i:s")."</b></p>
  " ;
 /*
 `id`, `name`, `mobile`, `requirements`, `gender`, `timings`, `expected_salary`, `address`,
@@ -58,7 +62,7 @@ while($row = $result->fetch_assoc()) {
     <td>".$row['expected_salary']."</td>
     <td>".$row['area']."</td>
     <td>".date_format(date_create($row['date']), 'd/m/y')."</td>
-    <td>".abs(strtotime(date("Y-m-d H:i:s")) - strtotime(date_create($row['date'])))." days old</td>
+    <td>".intval((strtotime(date("Y-m-d H:i:s")) - strtotime('2015-11-30 13:53:2'))/(60*60*24))." days old</td>
     
   </tr>
   <tr><td colspan=20>".$row['remarks']."</td></tr>
