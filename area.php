@@ -84,12 +84,13 @@
                 <!--END TITLE & BREADCRUMB PAGE-->
             </div>
             <!--END PAGE WRAPPER-->
-            <div id="container" class="effect mainnav-lg">
+            <div class="col-lg-2"></div>
+			<div class="col-lg-10">
 				<ul>
 					<?php
 						$srs = mysqli_query($db_handle, "SELECT area FROM service_request; ") ;
 						while ($srsrow = mysqli_fetch_array($srs)){
-							echo "<li><a href='findAreaRequests.php?area='".$srsrow['area'].">".$srsrow['area']."</a></li>" ;
+							echo "<li><a href="."findAreaRequests.php?area=".$srsrow['area'].">".$srsrow['area']."</a></li>" ;
 						} 
 						?>
 				</ul>

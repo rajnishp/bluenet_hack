@@ -28,7 +28,7 @@ if (isset($_POST['insert'])) {
 	if(mysqli_connect_errno()){		
 	}
 	else { 
-		header("Location: insert.php"); 
+		header("Location: cem_view.php"); 
 		}
 }
 ?>
@@ -108,7 +108,8 @@ if (isset($_POST['insert'])) {
                 <!--END TITLE & BREADCRUMB PAGE-->
             </div>
             <!--END PAGE WRAPPER-->
-            <div id="container" class="effect mainnav-lg">
+           <div class="col-lg-2"></div>
+			<div class="col-lg-10">
             <form class="form-horizontal" action="" method="post">
 				    <div class="form-group">
 				      <label class="col-md-3 control-label">Name</label>
