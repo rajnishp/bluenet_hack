@@ -7,7 +7,10 @@ $db_handle = mysqli_connect("localhost","root","redhat111111","bluenethack");
 	if (mysqli_connect_errno()) {
 	  	echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
-	
+	$sr_id = $_GET['sr_id'];
+	if(!isset($sr_id)){
+		header("Location: cem_view.php"); 
+	}
 	if (isset($_POST['update_value'])) {
 		$name = $_POST['name'];
 		$mobile = $_POST['mobile'];
@@ -16,6 +19,7 @@ $db_handle = mysqli_connect("localhost","root","redhat111111","bluenethack");
 		$salary = $_POST['salary'];
 		$area = $_POST['area'];
 		$remarks = $_POST['remarks'];
+		$worker_area = $_POST['worker_area'];
 		$gender = $_POST['gender'];
 		$skill = count($_POST['skill']);
 		for($i=0; $i < $skill; $i++) {
@@ -23,23 +27,46 @@ $db_handle = mysqli_connect("localhost","root","redhat111111","bluenethack");
 		}
 		$str2 = substr($requirement, 1);
 		$match_name = $_POST['m_name'];
-		$sr_id = $_POST['sr_id'];
+		$sr_id = $_GET['sr_id'];
 		$match_mobile = $_POST['m_phone'];
 		$match2_mobile = $_POST['m2_phone'];
 		$match2_name = $_POST['m_name'];
 		$time = date("Y-m-d H:i:s");
 		$sql = mysqli_query ($db_handle, "UPDATE service_request SET name='$name',mobile='$mobile',requirements='$str2',gender='$gender',timings='$timing',
 											expected_salary='$salary',address='$address',area='$area',remarks='$remarks',match_name='$match_name',
-											match_mobile='$match_mobile',match2_name='$match2_name',match2_mobile='$match2_mobile',last_updated='$time' 
-											WHERE id='$sr_id' ;");
+											match_mobile='$match_mobile',match2_name='$match2_name',match2_mobile='$match2_mobile',last_updated='$time', 
+											worker_area='$worker_area' WHERE id='$sr_id' ;");
+		$eachworkarea = explode(",", $worker_area);
+		foreach ($eachworkarea as $workareas) {
+			$workarea = mysqli_query ($db_handle, "SELECT * FROM area WHERE name='$workareas');");
+			if(mysqli_num_rows($workarea) != 0){
+				$areas = mysqli_fetch_array($workarea);
+				$area_id = $areas['id'];
+				$sql = mysqli_query ($db_handle, "INSERT INTO sr_area (id, sr_id) VALUES ('$area_id', '$sr_id');");
+			}
+			else {
+				$sql = mysqli_query ($db_handle, "INSERT INTO area (name) VALUES ('$workareas');");
+				$area_id = mysqli_insert_id($db_handle);
+				$sql = mysqli_query ($db_handle, "INSERT INTO sr_area (id, sr_id) VALUES ('$area_id', '$sr_id');");
+			}
+		}
 		if(mysqli_connect_errno()){		
 		}
 		else { 
 			header("Location: cem_view.php"); 
 		}
 	}
+	if (isset($_POST['add_note'])) {
+		$note = $_POST['noteVal'];
+		$sr_id = $_GET['sr_id'];
+		$sql = mysqli_query ($db_handle, "INSERT INTO notes (sr_id, note) VALUES ('$sr_id', '$note') ;") ;
+		if(mysqli_connect_errno()){		
+		}
+		else { 
+			header("Location: #"); 
+		}
+	}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,32 +92,24 @@ $db_handle = mysqli_connect("localhost","root","redhat111111","bluenethack");
 <body>
     <div>
             <!--BEGIN MODAL CONFIG PORTLET-->
-            <div id="modal-config" class="modal fade">
+            <div id="addNote" class="modal fade modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
-                                &times;</button>
-                            <h4 class="modal-title">
-                                Modal title</h4>
+                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                            <h4 class="modal-title">Add Note</h4>
                         </div>
                         <div class="modal-body">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend et nisl eget
-                                porta. Curabitur elementum sem molestie nisl varius, eget tempus odio molestie.
-                                Nunc vehicula sem arcu, eu pulvinar neque cursus ac. Aliquam ultricies lobortis
-                                magna et aliquam. Vestibulum egestas eu urna sed ultricies. Nullam pulvinar dolor
-                                vitae quam dictum condimentum. Integer a sodales elit, eu pulvinar leo. Nunc nec
-                                aliquam nisi, a mollis neque. Ut vel felis quis tellus hendrerit placerat. Vivamus
-                                vel nisl non magna feugiat dignissim sed ut nibh. Nulla elementum, est a pretium
-                                hendrerit, arcu risus luctus augue, mattis aliquet orci ligula eget massa. Sed ut
-                                ultricies felis.</p>
+                          <form class="form-horizontal" action="" method="post">
+							<div class="form-group">
+							  <label class="control-label">Note</label>
+								<textarea class="form-control" name='noteVal' placeholder="Add Note"></textarea>
+							</div> <!-- /.form-group -->
+                            <button type="submit" name="add_note" class="btn btn-primary pull-right">Add</button><br/>
+                          </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" data-dismiss="modal" class="btn btn-default">
-                                Close</button>
-                            <button type="button" class="btn btn-primary">
-                                Save changes</button>
+                            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                         </div>
                     </div>
                 </div>
@@ -149,94 +168,129 @@ $db_handle = mysqli_connect("localhost","root","redhat111111","bluenethack");
                 <!--END TITLE & BREADCRUMB PAGE-->
             </div>
             <!--END PAGE WRAPPER-->
+            <?php
+				$sr_id = $_GET['sr_id'];
+				$srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE id = '$sr_id'; ") ;
+				$srsrow = mysqli_fetch_array($srs);
+				$reqirements = $srsrow['requirements'];
+				$reqire = explode(",", $reqirements);
+            ?>
             <div class="col-lg-2"></div>
 			<div class="col-lg-10">
             <form class="form-horizontal" action="" method="post">
 				    <div class="form-group">
 				      <label class="col-md-3 control-label">Name</label>
 				      <div class="col-md-3">
-				        <input type="text" name ="name" class="form-control" placeholder="Name" />
+				        <input type="text" name ="name" class="form-control" placeholder="Name" value="<?= $srsrow['name'] ?>"/>
 				      </div> <!-- /.col -->
 				      <label class="col-md-1 control-label">Mobile No.</label>
 				      <div class="col-md-3">
-				        <input type="text" name ="mobile" class="form-control" placeholder="Enter 10 digit mobile number" />
+				        <input type="text" name ="mobile" class="form-control" placeholder="Enter 10 digit mobile number" value="<?= $srsrow['mobile'] ?>"/>
 				      </div> <!-- /.col -->
 				    </div> <!-- /.form-group -->
 				    <div class="form-group">
 				      	<label class="col-md-3 control-label">address</label>
 							<div class="col-md-3">
-				        	<input type="text" name ="address" class="form-control" placeholder="address" />
+				        	<input type="text" name ="address" class="form-control" placeholder="address" value="<?= $srsrow['address'] ?>"/>
 				      	</div> <!-- /.col -->
 				      	<label class="col-md-1 control-label">Worker timings</label>
 				      	<div class="col-md-3">
-				        	<input type="text" name ="timing" class="form-control" placeholder="Working Hours" />
+				        	<input type="text" name ="timing" class="form-control" placeholder="Working Hours" value="<?= $srsrow['timings'] ?>"/>
 				      	</div> <!-- /.col -->
 				    </div> <!-- /.form-group -->
 				    <div class="form-group">
-				      	<label class="col-md-3 control-label">Requierment</label>
+				      	<label class="col-md-3 control-label">Requierments</label>
 				      	<div class="col-md-3">
-				        	<input type="checkbox" name = "skill[]" data-toggle="button" value ='maid' /> Maid &nbsp;&nbsp;&nbsp;
-							<input type="checkbox" name = "skill[]" data-toggle="button" value ='cook' /> Cook &nbsp;&nbsp;&nbsp;
-							<input type="checkbox" name = "skill[]" data-toggle="button" value ='driver' /> driver <br/><br/>           
-							<input type="checkbox" name = "skill[]" data-toggle="button" value ='electrician' /> electrician &nbsp;&nbsp;&nbsp;           
-							<input type="checkbox" name = "skill[]" data-toggle="button" value ='plumber' /> Plumber &nbsp;&nbsp;&nbsp;           
-							<input type="checkbox" name = "skill[]" data-toggle="button" value ='carpenter' /> Carpenter <br/><br/>          
-							<input type="checkbox" name = "skill[]" data-toggle="button" value ='babysitter' /> Babysitter &nbsp;&nbsp;&nbsp;           
-							<input type="checkbox" name = "skill[]" data-toggle="button" value ='oldage' /> Old age care &nbsp;&nbsp;&nbsp;           
-							<input type="checkbox" name = "skill[]" data-toggle="button" value ='patient' />  Patient care &nbsp;&nbsp;&nbsp;           
+							<?php 
+								$abd = array();
+								foreach ($reqire as $donereqire){
+									array_push($abd , "$donereqire");
+									echo '<input type="checkbox" name = "skill[]" value ='.$donereqire.' checked/>&nbsp;&nbsp;&nbsp;'.$donereqire.'<br/>';
+								}
+								$allreqirements = array("maid","cook","driver","electrician","plumber","carpenter","babysitter","oldage","patient");
+								$nawreqire = array_diff($allreqirements, $abd);
+								foreach ($nawreqire as $val)
+								   echo '<input type="checkbox" name = "skill[]" value ='.$val.'/>&nbsp;&nbsp;&nbsp;'.$val.'<br/>';
+							?>          
 				      	</div> <!-- /.col -->
 				      	<label class="col-md-1 control-label">Other Specifications</label>
 				      	<div class="col-md-3">
-				        	<select name = "gender" > 
+				        	<select name = "gender" >
+								<?php 
+									$gender = $srsrow['gender'];
+									if($gender == "M") {
+								?> 
 								<option value="M" selected >Male</option>
 								<option value="F">Female</option>
+								<?php
+									}
+									else {
+								?>
+								<option value="M"  >Male</option>
+								<option value="F" selected>Female</option>
+								<?php } ?>
 							</select>
 				      	</div>
 				    </div>
 				    <div class="form-group">
 				      	<label class="col-md-3 control-label">Expected Salary</label>
 							<div class="col-md-3">
-				        	<input type="text" name ="salary" class="form-control" placeholder="Expected Salary" />
+				        	<input type="text" name ="salary" class="form-control" placeholder="Expected Salary" value="<?= $srsrow['expected_salary'] ?>"/>
 				      	</div> <!-- /.col -->
 				      	<label class="col-md-1 control-label">Area</label>
 				      	<div class="col-md-3">
-				        	<input type="text" name ="area" class="form-control" placeholder="Area" />
+				        	<input type="text" name ="area" class="form-control" placeholder="Area" value="<?= $srsrow['area'] ?>"/>
 				      	</div> <!-- /.col -->
 				    </div>
 				    <div class="form-group">
 				      	<label class="col-md-3 control-label">Remarks</label>
 							<div class="col-md-3">
-				        	<input type="text" name ="remarks" class="form-control" placeholder="remarks" />
+				        	<input type="text" name ="remarks" class="form-control" placeholder="remarks" value="<?= $srsrow['remarks'] ?>"/>
 				      	</div> <!-- /.col -->
+				      	<label class="col-md-1 control-label">Worker Area</label>
+				      	<div class="col-md-3">
+				        	<input type="text" name ="worker_area" class="form-control" placeholder="Worker Area" value="<?= $srsrow['worker_area'] ?>"/>
+				      	</div>
 				    </div>
 				    <div class="form-group">
 				      	<label class="col-md-3 control-label">Match 1 Name</label>
 							<div class="col-md-3">
-				        	<input type="text" name ="m_name" class="form-control" placeholder="Match 1 Name" />
+				        	<input type="text" name ="m_name" class="form-control" placeholder="Match 1 Name" value="<?= $srsrow['match_name'] ?>"/>
 				      	</div> <!-- /.col -->
 				      	<label class="col-md-1 control-label">Match 1 Mobile</label>
 				      	<div class="col-md-3">
-				        	<input type="text" name ="m_phone" class="form-control" placeholder="Match 1 Mobile" />
+				        	<input type="text" name ="m_phone" class="form-control" placeholder="Match 1 Mobile" value="<?= $srsrow['match_mobile'] ?>"/>
 				      	</div> <!-- /.col -->
 				    </div>
 				    <div class="form-group">
 				      	<label class="col-md-3 control-label">Match 2 Name</label>
 							<div class="col-md-3">
-				        	<input type="text" name ="m2_name" class="form-control" placeholder="Match 2 Name" />
+				        	<input type="text" name ="m2_name" class="form-control" placeholder="Match 2 Name" value="<?= $srsrow['match2_name'] ?>"/>
 				      	</div> <!-- /.col -->
 				      	<label class="col-md-1 control-label">Match 2 Mobile</label>
 				      	<div class="col-md-3">
-				        	<input type="text" name ="m2_phone" class="form-control" placeholder="Match 2 Mobile" />
+				        	<input type="text" name ="m2_phone" class="form-control" placeholder="Match 2 Mobile" value="<?= $srsrow['match2_mobile'] ?>"/>
 				      	</div> <!-- /.col -->
 				    </div>
 				    <div class="form-group">
 					    <label class="col-md-3 control-label"></label>
 					    <div class="col-md-7">
-							<input type="hidden" name="sr_id" value="<?= $_POST['update_sr']?>">
 					        <button type="submit" name="update_value" value="Submit">Update</button>
 					    </div>
 				    </div> <!-- /.form-group -->
 				</form>
+				<ul>
+				<?php
+					$notes = mysqli_query($db_handle, "SELECT * FROM notes WHERE sr_id = '$sr_id'; ") ;
+					
+					while($notesrow = mysqli_fetch_array($notes)){
+						$note_val = $notesrow['note'] ;
+						echo "<li>".$note_val."</li>" ;
+					}
+					
+				?>
+				</ul>
+				<a class='btn btn-success active' data-toggle='modal' data-target='#addNote'>Add Note</a>
     	</div>
         </div>
     </div>

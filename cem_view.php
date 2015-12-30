@@ -159,8 +159,8 @@
 						</form>
 	                </td>
 	                <td>
-						<form method="post" action="update.php">
-							<button type="submit" name="update_sr" value="<?= $srsrow['id'] ?>" class="btn btn-primary"> Edit </button>
+						<form method="post" action="update.php?sr_id=<?= $srsrow['id'] ?>">
+							<button type="submit" name="update_sr" class="btn btn-primary"> Edit </button>
 						</form>
 					</td>
 	            </tr>

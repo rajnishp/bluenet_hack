@@ -90,9 +90,13 @@
 					<?php
 						$srs = mysqli_query($db_handle, "SELECT area FROM service_request; ") ;
 						while ($srsrow = mysqli_fetch_array($srs)){
-							echo "<li><a href="."findAreaRequests.php?area=".$srsrow['area'].">".$srsrow['area']."</a></li>" ;
+							$allarea = $srsrow['worker_area'];
+							$area = explode(",", $allarea);
+							foreach ($area as $val) {
+								echo "<li><a href="."findAreaRequests.php?area=".$val.">".$val."</a></li>" ;	
+							}
 						} 
-						?>
+					?>
 				</ul>
     	</div>
         </div>

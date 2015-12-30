@@ -17,14 +17,30 @@ if (isset($_POST['insert'])) {
 	$salary = $_POST['salary'];
 	$area = $_POST['area'];
 	$remarks = $_POST['remarks'];
+	$worker_area = $_POST['worker_area'];
 	$gender = $_POST['gender'];
 	$skill = count($_POST['skill']);
 	for($i=0; $i < $skill; $i++) {
-      $requirement .= ",".$_POST['skill'][$i];
+      $requirement .= ", ".$_POST['skill'][$i];
     }
     $str2 = substr($requirement, 1); 
-	$sql = mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, expected_salary, address, area, remarks) 
-										VALUES ('$name','$mobile','$str2','$gender','$timing','$salary','$address','$area','$remarks');");
+	$sql = mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, expected_salary, address, area, remarks, worker_area) 
+										VALUES ('$name','$mobile','$str2','$gender','$timing','$salary','$address','$area','$remarks', '$worker_area');");
+	$sr_id = mysqli_insert_id($db_handle);
+	$eachworkarea = explode(",", $worker_area);
+	foreach ($eachworkarea as $workareas) {
+		$workarea = mysqli_query ($db_handle, "SELECT * FROM area WHERE name='$workareas');");
+		if(mysqli_num_rows($workarea) != 0){
+			$areas = mysqli_fetch_array($workarea);
+			$area_id = $areas['id'];
+			$sql = mysqli_query ($db_handle, "INSERT INTO sr_area (id, sr_id) VALUES ('$area_id', '$sr_id');");
+		}
+		else {
+			$sql = mysqli_query ($db_handle, "INSERT INTO area (name) VALUES ('$workareas');");
+			$area_id = mysqli_insert_id($db_handle);
+			$sql = mysqli_query ($db_handle, "INSERT INTO sr_area (id, sr_id) VALUES ('$area_id', '$sr_id');");
+		}
+	}
 	if(mysqli_connect_errno()){		
 	}
 	else { 
@@ -134,15 +150,15 @@ if (isset($_POST['insert'])) {
 				    <div class="form-group">
 				      	<label class="col-md-3 control-label">Requierment</label>
 				      	<div class="col-md-3">
-				        	<input type="checkbox" name = "skill[]" data-toggle="button" value ='maid' /> Maid &nbsp;&nbsp;&nbsp;
-							<input type="checkbox" name = "skill[]" data-toggle="button" value ='cook' /> Cook &nbsp;&nbsp;&nbsp;
-							<input type="checkbox" name = "skill[]" data-toggle="button" value ='driver' /> driver <br/><br/>           
-							<input type="checkbox" name = "skill[]" data-toggle="button" value ='electrician' /> electrician &nbsp;&nbsp;&nbsp;           
-							<input type="checkbox" name = "skill[]" data-toggle="button" value ='plumber' /> Plumber &nbsp;&nbsp;&nbsp;           
-							<input type="checkbox" name = "skill[]" data-toggle="button" value ='carpenter' /> Carpenter <br/><br/>          
-							<input type="checkbox" name = "skill[]" data-toggle="button" value ='babysitter' /> Babysitter &nbsp;&nbsp;&nbsp;           
-							<input type="checkbox" name = "skill[]" data-toggle="button" value ='oldage' /> Old age care &nbsp;&nbsp;&nbsp;           
-							<input type="checkbox" name = "skill[]" data-toggle="button" value ='patient' />  Patient care &nbsp;&nbsp;&nbsp;           
+				        	<input type="checkbox" name = "skill[]" value ='maid' /> Maid &nbsp;&nbsp;&nbsp;
+							<input type="checkbox" name = "skill[]" value ='cook' /> Cook &nbsp;&nbsp;&nbsp;
+							<input type="checkbox" name = "skill[]" value ='driver' /> driver <br/><br/>           
+							<input type="checkbox" name = "skill[]" value ='electrician' /> electrician &nbsp;&nbsp;&nbsp;           
+							<input type="checkbox" name = "skill[]" value ='plumber' /> Plumber &nbsp;&nbsp;&nbsp;           
+							<input type="checkbox" name = "skill[]" value ='carpenter' /> Carpenter <br/><br/>          
+							<input type="checkbox" name = "skill[]" value ='babysitter' /> Babysitter &nbsp;&nbsp;&nbsp;           
+							<input type="checkbox" name = "skill[]" value ='oldage' /> Old age care &nbsp;&nbsp;&nbsp;           
+							<input type="checkbox" name = "skill[]" value ='patient' />  Patient care &nbsp;&nbsp;&nbsp;           
 				      	</div> <!-- /.col -->
 				      	<label class="col-md-1 control-label">Other Specifications</label>
 				      	<div class="col-md-3">
@@ -167,6 +183,10 @@ if (isset($_POST['insert'])) {
 							<div class="col-md-3">
 				        	<input type="text" name ="remarks" class="form-control" placeholder="remarks" />
 				      	</div> <!-- /.col -->
+				      	<label class="col-md-1 control-label">Worker Area</label>
+				      	<div class="col-md-3">
+				        	<input type="text" name ="worker_area" class="form-control" placeholder="Worker Area" />
+				      	</div>
 				    </div>
 				    <div class="form-group">
 					    <label class="col-md-3 control-label"></label>
