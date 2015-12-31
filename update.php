@@ -228,13 +228,18 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 								?> 
 								<option value="M" selected >Male</option>
 								<option value="F">Female</option>
+								<option value="A">Any</option>
 								<?php
 									}
-									else {
+									else if($gender == "F") {
 								?>
 								<option value="M"  >Male</option>
 								<option value="F" selected>Female</option>
-								<?php } ?>
+								<option value="A">Any</option>
+								<?php } else { 	?>
+								<option value="M"  >Male</option>
+								<option value="F" >Female</option>
+								<option value="A" selected>Any</option>
 							</select>
 				      	</div>
 				    </div>

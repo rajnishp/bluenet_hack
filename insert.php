@@ -171,6 +171,7 @@ if (isset($_POST['insert'])) {
 				        	<select name = "gender" > 
 								<option value="M" selected >Male</option>
 								<option value="F">Female</option>
+								<option value="A">Any</option>
 							</select>
 				      	</div>
 				    </div>
