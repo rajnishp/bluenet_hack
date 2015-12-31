@@ -72,6 +72,10 @@
                         <div class="icon-bg bg-blue"></div>
 						<span class="menu-title">Decay Requests</span></a>
                     </li>
+                    <li><a href="cem_view.php?status=followback">
+                        <div class="icon-bg bg-blue"></div>
+						<span class="menu-title">Follow back Requests</span></a>
+                    </li>
                     <li><a href="24hour.php">
                         <div class="icon-bg bg-blue"></div>
 						<span class="menu-title">View 24hours Requests</span></a>
@@ -155,6 +159,7 @@
 							<select name="new_status">
 								<option value="<?= $srsrow['status'] ?>" selected><?= $srsrow['status'] ?></option>
 								<option value="open">Open</option>
+								<option value="followback">Followback</option>
 								<option value="cem_open" >CEM - Open</option>
 								<option value="done" >Done</option>
 								<option value="decay" >Decay</option>

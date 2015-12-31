@@ -101,6 +101,10 @@ if (isset($_POST['insert'])) {
                         <div class="icon-bg bg-blue"></div>
 						<span class="menu-title">Decay Requests</span></a>
                     </li>
+                    <li><a href="cem_view.php?status=followback">
+                        <div class="icon-bg bg-blue"></div>
+						<span class="menu-title">Follow back Requests</span></a>
+                    </li>
                     <li><a href="24hour.php">
                         <div class="icon-bg bg-blue"></div>
 						<span class="menu-title">View 24hours Requests</span></a>
