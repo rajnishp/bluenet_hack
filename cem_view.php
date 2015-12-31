@@ -72,6 +72,10 @@
                         <div class="icon-bg bg-blue"></div>
 						<span class="menu-title">Decay Requests</span></a>
                     </li>
+                    <li><a href="24hour.php">
+                        <div class="icon-bg bg-blue"></div>
+						<span class="menu-title">View 24hours Requests</span></a>
+                    </li>
                     <li><a href="insert.php">
                         <div class="icon-bg bg-red"></div>
 						<span class="menu-title">Insert New Service Request</span></a>
@@ -97,8 +101,8 @@
                 <!--END TITLE & BREADCRUMB PAGE-->
             </div>
             <!--END PAGE WRAPPER-->
-           <div class="col-lg-2"></div>
-			<div class="col-lg-10">
+           <div class="col-lg-3"></div>
+			<div class="col-lg-9">
             <table id="example" class="display" cellspacing="0" width="100%">
 	        <thead>
 	            <tr>
@@ -110,6 +114,7 @@
 	                <th>Salary</th>
 	                <th>Address</th>
 	                <th>Remarks</th>
+	                <th>Work Time</th>
 	                <th>Date</th>
 	                <th>Match 1</th>
 	                <th>Match 2</th>
@@ -141,6 +146,7 @@
 	                <td><?= $srsrow['expected_salary'] ?> </td>
 	                <td><?= $srsrow['address'] ?> </td>
 	                <td><?= $srsrow['remarks'] ?> </td>
+	                <td><?= $srsrow['time'] ?> </td>
 	                <td><?= $srsrow['date'] ?> </td>
 	                <td><?= $srsrow['match_name'] ?> <?= $srsrow['match_mobile'] ?> </td>
 	                <td><?= $srsrow['match2_name'] ?> <?= $srsrow['match2_mobile'] ?> </td>

@@ -17,6 +17,7 @@ if (isset($_POST['insert'])) {
 	$salary = $_POST['salary'];
 	$area = $_POST['area'];
 	$remarks = $_POST['remarks'];
+	$time = $_POST['time'];
 	$worker_area = $_POST['worker_area'];
 	$gender = $_POST['gender'];
 	$skill = count($_POST['skill']);
@@ -24,8 +25,9 @@ if (isset($_POST['insert'])) {
       $requirement .= ", ".$_POST['skill'][$i];
     }
     $str2 = substr($requirement, 1); 
-	$sql = mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, expected_salary, address, area, remarks, worker_area) 
-										VALUES ('$name','$mobile','$str2','$gender','$timing','$salary','$address','$area','$remarks', '$worker_area');");
+	$sql = mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, expected_salary, address, area, 
+										remarks, worker_area, time)	VALUES ('$name','$mobile','$str2','$gender','$timing','$salary','$address',
+										'$area','$remarks', '$worker_area', 'time');");
 	$sr_id = mysqli_insert_id($db_handle);
 	$eachworkarea = explode(",", $worker_area);
 	foreach ($eachworkarea as $workareas) {
@@ -98,6 +100,10 @@ if (isset($_POST['insert'])) {
                     <li><a href="cem_view.php?status=decay">
                         <div class="icon-bg bg-blue"></div>
 						<span class="menu-title">Decay Requests</span></a>
+                    </li>
+                    <li><a href="24hour.php">
+                        <div class="icon-bg bg-blue"></div>
+						<span class="menu-title">View 24hours Requests</span></a>
                     </li>
                     <li><a href="insert.php">
                         <div class="icon-bg bg-red"></div>
@@ -177,6 +183,12 @@ if (isset($_POST['insert'])) {
 				      	<div class="col-md-3">
 				        	<input type="text" name ="area" class="form-control" placeholder="Area" />
 				      	</div> <!-- /.col -->
+				    </div>
+				    <div class="form-group">
+						<label class="col-md-3 control-label">Working Time in Hours</label>
+				      	<div class="col-md-3">
+				        	<input type="text" name ="time" class="form-control" placeholder="Working Time in Hours"/>
+				      	</div>
 				    </div>
 				    <div class="form-group">
 				      	<label class="col-md-3 control-label">Remarks</label>

@@ -19,6 +19,8 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 		$salary = $_POST['salary'];
 		$area = $_POST['area'];
 		$remarks = $_POST['remarks'];
+		$time = $_POST['time'];
+		$worker_area = $_POST['worker_area'];
 		$worker_area = $_POST['worker_area'];
 		$gender = $_POST['gender'];
 		$skill = count($_POST['skill']);
@@ -35,7 +37,7 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 		$sql = mysqli_query ($db_handle, "UPDATE service_request SET name='$name',mobile='$mobile',requirements='$str2',gender='$gender',timings='$timing',
 											expected_salary='$salary',address='$address',area='$area',remarks='$remarks',match_name='$match_name',
 											match_mobile='$match_mobile',match2_name='$match2_name',match2_mobile='$match2_mobile',last_updated='$time', 
-											worker_area='$worker_area' WHERE id='$sr_id' ;");
+											worker_area='$worker_area', time='$time' WHERE id='$sr_id' ;");
 		$eachworkarea = explode(",", $worker_area);
 		foreach ($eachworkarea as $workareas) {
 			$workarea = mysqli_query ($db_handle, "SELECT * FROM area WHERE name='$workareas');");
@@ -142,6 +144,10 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
                     <li><a href="cem_view.php?status=decay">
                         <div class="icon-bg bg-blue"></div>
 						<span class="menu-title">Decay Requests</span></a>
+                    </li>
+                    <li><a href="24hour.php">
+                        <div class="icon-bg bg-blue"></div>
+						<span class="menu-title">View 24hours Requests</span></a>
                     </li>
                     <li><a href="insert.php">
                         <div class="icon-bg bg-red"></div>
@@ -250,6 +256,12 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 				      	<label class="col-md-1 control-label">Worker Area</label>
 				      	<div class="col-md-3">
 				        	<input type="text" name ="worker_area" class="form-control" placeholder="Worker Area" value="<?= $srsrow['worker_area'] ?>"/>
+				      	</div>
+				    </div>
+				    <div class="form-group">
+						<label class="col-md-3 control-label">Working Time in Hours</label>
+				      	<div class="col-md-3">
+				        	<input type="text" name ="time" class="form-control" placeholder="Working Time in Hours" value="<?= $srsrow['time'] ?>"/>
 				      	</div>
 				    </div>
 				    <div class="form-group">

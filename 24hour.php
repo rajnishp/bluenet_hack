@@ -6,6 +6,17 @@
 	if (mysqli_connect_errno()) {
 	  	echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
+
+	if (isset($_POST['update_status'])) {
+		$newStatus = $_POST['new_status'];
+		$sr_id = $_POST['sr_id'];
+		$sql = mysqli_query ($db_handle, "UPDATE service_request SET status= '$newStatus' WHERE id = '$sr_id' ;");
+		if(mysqli_connect_errno()){		
+		}
+		else { 
+			header("Location: cem_view.php"); 
+		}
+	}
 ?>
 
 <!DOCTYPE html>
@@ -88,20 +99,75 @@
                 <!--END TITLE & BREADCRUMB PAGE-->
             </div>
             <!--END PAGE WRAPPER-->
-            <div class="col-lg-3"></div>
+           <div class="col-lg-3"></div>
 			<div class="col-lg-9">
-				<ul>
-					<?php
-						$srs = mysqli_query($db_handle, "SELECT worker_area FROM service_request; ") ;
+            <table id="example" class="display" cellspacing="0" width="100%">
+	        <thead>
+	            <tr>
+	                <th>Name</th>
+	                <th>Mobile</th>
+	                <th>Requirement</th>
+	                <th>Gender</th>
+	                <th>Timing</th>
+	                <th>Salary</th>
+	                <th>Address</th>
+	                <th>Remarks</th>
+	                <th>Work Time</th>
+	                <th>Date</th>
+	                <th>Match 1</th>
+	                <th>Match 2</th>
+	                <th>Status</th>
+	            </tr>
+	        </thead>
+	        <tfoot>
+	            <tr>
+	                
+	            </tr>
+	        </tfoot>
+	        <tbody>
+	            <tr>
+	            	<?php
+						$srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE time = '24'; ") ;
 						while ($srsrow = mysqli_fetch_array($srs)){
-							$allarea = $srsrow['worker_area'];
-							$area = explode(",", $allarea);
-							foreach ($area as $val) {
-								echo "<li><a href="."findAreaRequests.php?area=".$val.">".$val."</a></li>" ;	
-							}
-						} 
 					?>
-				</ul>
+					
+	                <td><?= $srsrow['name'] ?> </td>
+	                <td><?= $srsrow['mobile'] ?> </td>
+	                <td><?= $srsrow['requirements'] ?> </td>
+	                <td><?= $srsrow['gender'] ?> </td>
+	                <td><?= $srsrow['timings'] ?> </td>
+	                <td><?= $srsrow['expected_salary'] ?> </td>
+	                <td><?= $srsrow['address'] ?> </td>
+	                <td><?= $srsrow['remarks'] ?> </td>
+	                <td><?= $srsrow['time'] ?> </td>
+	                <td><?= $srsrow['date'] ?> </td>
+	                <td><?= $srsrow['match_name'] ?> <?= $srsrow['match_mobile'] ?> </td>
+	                <td><?= $srsrow['match2_name'] ?> <?= $srsrow['match2_mobile'] ?> </td>
+	                <td>
+	                	<form method="POST" action="">
+							<select name="new_status">
+								<option value="<?= $srsrow['status'] ?>" selected><?= $srsrow['status'] ?></option>
+								<option value="open">Open</option>
+								<option value="cem_open" >CEM - Open</option>
+								<option value="done" >Done</option>
+								<option value="decay" >Decay</option>
+
+							</select>
+							<input type="hidden" name="sr_id" value="<?= $srsrow['id'] ?>">
+							<button type="submit" name="update_status" class="btn btn-primary"> Update </button>
+						</form>
+	                </td>
+	                <td>
+						<form method="post" action="update.php?sr_id=<?= $srsrow['id'] ?>">
+							<button type="submit" name="update_sr" class="btn btn-primary"> Edit </button>
+						</form>
+					</td>
+	            </tr>
+	            <?php
+	            	}
+				?>
+	        </tbody>
+    	</table>
     	</div>
         </div>
     </div>
@@ -113,6 +179,11 @@
     <script src="script/responsive-tabs.js"></script>
     <!--CORE JAVASCRIPT-->
     <script src="script/main.js"></script>
-    
+    <script type="text/javascript">
+		$(document).ready(function() {
+		    $('#example').DataTable();
+		} );
+	</script>
 </body>
 </html>
+
