@@ -240,6 +240,7 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 								<option value="M"  >Male</option>
 								<option value="F" >Female</option>
 								<option value="A" selected>Any</option>
+								<?php } ?>
 							</select>
 				      	</div>
 				    </div>
