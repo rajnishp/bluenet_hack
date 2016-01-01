@@ -17,7 +17,8 @@ if (isset($_POST['insert'])) {
 	$salary = $_POST['salary'];
 	$area = $_POST['area'];
 	$remarks = $_POST['remarks'];
-	$time = $_POST['time'];
+	$time = $_POST['work_time'];
+	$created_time = $_POST['created_time'];
 	$worker_area = $_POST['worker_area'];
 	$gender = $_POST['gender'];
 	$skill = count($_POST['skill']);
@@ -26,8 +27,8 @@ if (isset($_POST['insert'])) {
     }
     $str2 = substr($requirement, 1); 
 	$sql = mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, expected_salary, address, area, 
-										remarks, worker_area, time)	VALUES ('$name','$mobile','$str2','$gender','$timing','$salary','$address',
-										'$area','$remarks', '$worker_area', 'time');");
+										remarks, worker_area, work_time, created_time)	VALUES ('$name','$mobile','$str2','$gender','$timing','$salary',
+										'$address', '$area','$remarks', '$worker_area', '$time', '$created_time');");
 	$sr_id = mysqli_insert_id($db_handle);
 	$eachworkarea = explode(",", $worker_area);
 	foreach ($eachworkarea as $workareas) {
@@ -192,7 +193,11 @@ if (isset($_POST['insert'])) {
 				    <div class="form-group">
 						<label class="col-md-3 control-label">Working Time in Hours</label>
 				      	<div class="col-md-3">
-				        	<input type="text" name ="time" class="form-control" placeholder="Working Time in Hours"/>
+				        	<input type="text" name ="work_time" class="form-control" placeholder="Working Time in Hours"/>
+				      	</div>
+				      	<label class="col-md-1 control-label">Created Date</label>
+				      	<div class="col-md-3">
+				        	<input type="text" name ="created_time" class="form-control" placeholder="Created Date" />
 				      	</div>
 				    </div>
 				    <div class="form-group">

@@ -19,7 +19,8 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 		$salary = $_POST['salary'];
 		$area = $_POST['area'];
 		$remarks = $_POST['remarks'];
-		$time = $_POST['time'];
+		$work_time = $_POST['work_time'];
+		$created_time = $_POST['created_time'];
 		$worker_area = $_POST['worker_area'];
 		$worker_area = $_POST['worker_area'];
 		$gender = $_POST['gender'];
@@ -37,7 +38,7 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 		$sql = mysqli_query ($db_handle, "UPDATE service_request SET name='$name',mobile='$mobile',requirements='$str2',gender='$gender',timings='$timing',
 											expected_salary='$salary',address='$address',area='$area',remarks='$remarks',match_name='$match_name',
 											match_mobile='$match_mobile',match2_name='$match2_name',match2_mobile='$match2_mobile',last_updated='$time', 
-											worker_area='$worker_area', time='$time' WHERE id='$sr_id' ;");
+											worker_area='$worker_area', work_time='$work_time', created_time='$created_time' WHERE id='$sr_id' ;");
 		$eachworkarea = explode(",", $worker_area);
 		foreach ($eachworkarea as $workareas) {
 			$workarea = mysqli_query ($db_handle, "SELECT * FROM area WHERE name='$workareas');");
@@ -271,7 +272,11 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 				    <div class="form-group">
 						<label class="col-md-3 control-label">Working Time in Hours</label>
 				      	<div class="col-md-3">
-				        	<input type="text" name ="time" class="form-control" placeholder="Working Time in Hours" value="<?= $srsrow['time'] ?>"/>
+				        	<input type="text" name ="work_time" class="form-control" placeholder="Working Time in Hours" value="<?= $srsrow['work_time'] ?>"/>
+				      	</div>
+				      	<label class="col-md-1 control-label">Created Date</label>
+				      	<div class="col-md-3">
+				        	<input type="text" name ="created_time" class="form-control" placeholder="Created Date" value="<?= $srsrow['created_time'] ?>"/>
 				      	</div>
 				    </div>
 				    <div class="form-group">
