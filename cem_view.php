@@ -1,6 +1,6 @@
 <?php
 
-	$db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
+	$db_handle = mysqli_connect("localhost","root","redhat111111","bluenethack");
 
 //Check connection
 	if (mysqli_connect_errno()) {
@@ -40,7 +40,7 @@
     <link type="text/css" rel="stylesheet" href="styles/style-responsive.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/dt/dt-1.10.10/datatables.min.css"/>
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"/>
- 	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+ 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/s/dt/dt-1.10.10/datatables.min.js"></script>
 </head>
 <body>

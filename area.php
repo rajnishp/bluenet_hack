@@ -1,6 +1,6 @@
 <?php
 
-	$db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
+	$db_handle = mysqli_connect("localhost","root","redhat111111","bluenethack");
 
 //Check connection
 	if (mysqli_connect_errno()) {
@@ -99,7 +99,7 @@
 						$srs = mysqli_query($db_handle, "SELECT name FROM area; ") ;
 						while ($srsrow = mysqli_fetch_array($srs)){
 							$allarea = $srsrow['name'];
-								echo "<li><a href="."findAreaRequests.php?area=".$allarea.">".$allarea."</a></li>" ;	
+								echo "<li><a href=\"findAreaRequests.php?area=".$allarea."\">".$allarea."</a></li>" ;	
 						} 
 					?>
 				</ul>
