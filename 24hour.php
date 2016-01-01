@@ -117,6 +117,7 @@
 	                <th>Address</th>
 	                <th>Remarks</th>
 	                <th>Work Time</th>
+	                <th>Created Date</th>
 	                <th>Date</th>
 	                <th>Match 1</th>
 	                <th>Match 2</th>
@@ -130,7 +131,7 @@
 	        </tfoot>
 	        <tbody>
 				<?php
-					$srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE time = '24'; ") ;
+					$srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE work_time ='24'; ") ;
 					while ($srsrow = mysqli_fetch_array($srs)){
 				?>
 	            <tr>
@@ -142,7 +143,8 @@
 	                <td><?= $srsrow['expected_salary'] ?> </td>
 	                <td><?= $srsrow['address'] ?> </td>
 	                <td><?= $srsrow['remarks'] ?> </td>
-	                <td><?= $srsrow['time'] ?> </td>
+	                <td><?= $srsrow['work_time'] ?> </td>
+	                <td><?= $srsrow['created_time'] ?> </td>
 	                <td><?= $srsrow['date'] ?> </td>
 	                <td><?= $srsrow['match_name'] ?> <?= $srsrow['match_mobile'] ?> </td>
 	                <td><?= $srsrow['match2_name'] ?> <?= $srsrow['match2_mobile'] ?> </td>
