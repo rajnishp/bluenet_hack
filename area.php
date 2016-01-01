@@ -96,13 +96,10 @@
 			<div class="col-lg-9">
 				<ul>
 					<?php
-						$srs = mysqli_query($db_handle, "SELECT worker_area FROM service_request; ") ;
+						$srs = mysqli_query($db_handle, "SELECT name FROM area; ") ;
 						while ($srsrow = mysqli_fetch_array($srs)){
-							$allarea = $srsrow['worker_area'];
-							$area = explode(",", $allarea);
-							foreach ($area as $val) {
-								echo "<li><a href="."findAreaRequests.php?area=".$val.">".$val."</a></li>" ;	
-							}
+							$allarea = $srsrow['name'];
+								echo "<li><a href="."findAreaRequests.php?area=".$allarea.">".$allarea."</a></li>" ;	
 						} 
 					?>
 				</ul>
