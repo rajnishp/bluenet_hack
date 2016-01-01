@@ -129,12 +129,11 @@
 	            </tr>
 	        </tfoot>
 	        <tbody>
+				<?php
+					$srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE time = '24'; ") ;
+					while ($srsrow = mysqli_fetch_array($srs)){
+				?>
 	            <tr>
-	            	<?php
-						$srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE time = '24'; ") ;
-						while ($srsrow = mysqli_fetch_array($srs)){
-					?>
-					
 	                <td><?= $srsrow['name'] ?> </td>
 	                <td><?= $srsrow['mobile'] ?> </td>
 	                <td><?= $srsrow['requirements'] ?> </td>
