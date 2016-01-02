@@ -31,17 +31,17 @@
     <link rel="shortcut icon" href="images/icons/favicon.ico">
     <link rel="apple-touch-icon" href="images/icons/favicon.png">
     <!--Loading bootstrap css-->
-    <link type="text/css" rel="stylesheet" href="styles/jquery-ui-1.10.4.custom.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/font-awesome.min.css">
+    
     <link type="text/css" rel="stylesheet" href="styles/animate.css">
     <link type="text/css" rel="stylesheet" href="styles/all.css">
     <link type="text/css" rel="stylesheet" href="styles/main.css">
     <link type="text/css" rel="stylesheet" href="styles/style-responsive.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/dt/dt-1.10.10/datatables.min.css"/>
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"/>
- 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script type="text/javascript" src="https://cdn.datatables.net/s/dt/dt-1.10.10/datatables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"/>
+	
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/dt/dt-1.10.10/datatables.min.css"/> -->
+	
 </head>
 <body>
     <div>
@@ -107,7 +107,7 @@
             <!--END PAGE WRAPPER-->
             <div class="col-lg-3"></div>
 			<div class="col-lg-9">
-            <table id="example" class="display" cellspacing="0" width="100%">
+            <table id="example1" class="display" cellspacing="0" width="100%">
 	        <thead>
 	            <tr>
 	                <th>Name</th>
@@ -124,6 +124,7 @@
 	                <th>Match 1</th>
 	                <th>Match 2</th>
 	                <th>Status</th>
+	                <th>Edit</th>
 	            </tr>
 	        </thead>
 	        <tbody>
@@ -178,18 +179,23 @@
     	</div>
         </div>
     </div>
-    <script src="script/jquery-1.10.2.min.js"></script>
-    <script src="script/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    
+    <script type="text/javascript">
+		$(document).ready(function() {
+		    $('#example1').DataTable( {
+		    "iDisplayLength": 50 });
+		} );
+	</script>
+    
+ 	<script src="script/bootstrap.min.js"></script>
+    
     <script src="script/jquery-ui.js"></script>
-    <script src="script/bootstrap.min.js"></script>
+    
     <script src="script/bootstrap-hover-dropdown.js"></script>
     <script src="script/responsive-tabs.js"></script>
     <!--CORE JAVASCRIPT-->
     <script src="script/main.js"></script>
-    <script type="text/javascript">
-		$(document).ready(function() {
-		    $('#example').DataTable();
-		} );
-	</script>
+    <script type="text/javascript" src="https://cdn.datatables.net/s/dt/dt-1.10.10/datatables.min.js"></script>
 </body>
 </html>
