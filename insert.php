@@ -98,6 +98,14 @@ if (isset($_POST['insert'])) {
                         <div class="icon-bg bg-violet"></div>
 						<span class="menu-title">Done Request</span></a>
                     </li>
+                    <li><a href="cem_view.php?status=salary_issue">
+                        <div class="icon-bg bg-blue"></div>
+						<span class="menu-title">Salary Issues</span></a>
+                    </li>
+                    <li><a href="cem_view.php?status=not_interested">
+                        <div class="icon-bg bg-blue"></div>
+						<span class="menu-title">Not Interested</span></a>
+                    </li>
                     <li><a href="cem_view.php?status=decay">
                         <div class="icon-bg bg-blue"></div>
 						<span class="menu-title">Decay Requests</span></a>
