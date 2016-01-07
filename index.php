@@ -16,7 +16,7 @@
 		if(mysqli_connect_errno()){		
 		}
 		else { 
-			header("Location: cem_view.php"); 
+			header("Location: index.php"); 
 		}
 	}
 ?>
@@ -52,35 +52,35 @@
             <div class="sidebar-collapse menu-scroll">
                 <ul id="side-menu" class="nav">      
                      <div class="clearfix"></div>
-                    <li class="active"><a href="cem_view.php">
+                    <li class="active"><a href="index.php">
                         <div class="icon-bg bg-orange"></div>
 						<span class="menu-title">View all request</span></a>
                     </li>
-                    <li><a href="cem_view.php?status=cem_open">
+                    <li><a href="index.php?status=cem_open">
                         <div class="icon-bg bg-pink"></div>
 						<span class="menu-title">CEM Open</span></a>   
                     </li>
-                    <li><a href="cem_view.php?status=open">
+                    <li><a href="index.php?status=open">
                         <div class="icon-bg bg-pink"></div>
 						<span class="menu-title">Open Requests</span></a>   
                     </li>
-                    <li><a href="cem_view.php?status=done">
+                    <li><a href="index.php?status=done">
                         <div class="icon-bg bg-violet"></div>
 						<span class="menu-title">Done Request</span></a>
                     </li>
-                    <li><a href="cem_view.php?status=salary_issue">
+                    <li><a href="index.php?status=salary_issue">
                         <div class="icon-bg bg-blue"></div>
 						<span class="menu-title">Salary Issues</span></a>
                     </li>
-                    <li><a href="cem_view.php?status=not_interested">
+                    <li><a href="index.php?status=not_interested">
                         <div class="icon-bg bg-blue"></div>
 						<span class="menu-title">Not Interested</span></a>
                     </li>
-                    <li><a href="cem_view.php?status=decay">
+                    <li><a href="index.php?status=decay">
                         <div class="icon-bg bg-blue"></div>
 						<span class="menu-title">Decay Requests</span></a>
                     </li>
-                    <li><a href="cem_view.php?status=followback">
+                    <li><a href="index.php?status=followback">
                         <div class="icon-bg bg-blue"></div>
 						<span class="menu-title">Follow back Requests</span></a>
                     </li>
