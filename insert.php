@@ -47,7 +47,7 @@ if (isset($_POST['insert'])) {
 	if(mysqli_connect_errno()){		
 	}
 	else { 
-		header("Location: cem_view.php"); 
+		header("Location: index.php"); 
 		}
 }
 ?>

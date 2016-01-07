@@ -9,7 +9,7 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 	}
 	$sr_id = $_GET['sr_id'];
 	if(!isset($sr_id)){
-		header("Location: cem_view.php"); 
+		header("Location: index.php"); 
 	}
 	if (isset($_POST['update_value'])) {
 		$name = $_POST['name'];
@@ -56,7 +56,7 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 		if(mysqli_connect_errno()){		
 		}
 		else { 
-			header("Location: cem_view.php"); 
+			header("Location: index.php"); 
 		}
 	}
 	if (isset($_POST['add_note'])) {
@@ -66,7 +66,7 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 		if(mysqli_connect_errno()){		
 		}
 		else { 
-			header("Location: #"); 
+			header("Location: index.php"); 
 		}
 	}
 ?>
