@@ -49,81 +49,78 @@
 	
 </head>
 <body>
-    <div>
-        <div id="wrapper">
-            <!--BEGIN SIDEBAR MENU-->
-            <nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
-                data-position="right" class="navbar-default navbar-static-side">
-            <div class="sidebar-collapse menu-scroll">
-                <ul id="side-menu" class="nav">      
-                     <div class="clearfix"></div>
-                    <li class="active"><a href="index.php">
-                        <div class="icon-bg bg-orange"></div>
-						<span class="menu-title">View all request</span></a>
-                    </li>
-                    <li><a href="index.php?status=cem_open">
-                        <div class="icon-bg bg-pink"></div>
-						<span class="menu-title">CEM Open</span></a>   
-                    </li>
-                    <li><a href="index.php?status=open">
-                        <div class="icon-bg bg-pink"></div>
-						<span class="menu-title">ME Open</span></a>   
-                    </li>
-                    <li><a href="index.php?status=done">
-                        <div class="icon-bg bg-violet"></div>
-						<span class="menu-title">Done Request</span></a>
-                    </li>
-                    <li><a href="index.php?status=salary_issue">
-                        <div class="icon-bg bg-blue"></div>
-						<span class="menu-title">Salary Issues</span></a>
-                    </li>
-                    <li><a href="index.php?status=not_interested">
-                        <div class="icon-bg bg-blue"></div>
-						<span class="menu-title">Not Interested</span></a>
-                    </li>
-                    <li><a href="index.php?status=decay">
-                        <div class="icon-bg bg-blue"></div>
-						<span class="menu-title">Decay Requests</span></a>
-                    </li>
-                    <li><a href="index.php?status=followback">
-                        <div class="icon-bg bg-blue"></div>
-						<span class="menu-title">Follow back Requests</span></a>
-                    </li>
-                    <li><a href="24hour.php">
-                        <div class="icon-bg bg-blue"></div>
-						<span class="menu-title">View 24hours Requests</span></a>
-                    </li>
-                    <li><a href="insert.php">
-                        <div class="icon-bg bg-red"></div>
-						<span class="menu-title">Insert New Service Request</span></a>
-                    </li>
-                    <li><a href="area.php">
-                        <div class="icon-bg bg-blue"></div>
-						<span class="menu-title">Print Area</span></a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+   <div id="wrapper">
+   <!--BEGIN SIDEBAR MENU-->
+      <nav id="sidebar" role="navigation" data-step="2" data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
+             data-position="right" class="navbar-default navbar-static-side">
+        <div class="sidebar-collapse menu-scroll">
+            <ul id="side-menu" class="nav">      
+              <div class="clearfix"></div>
+			  <li class="active"><a href="index.php">
+				<div class="icon-bg bg-orange"></div>
+				<span class="menu-title">View all request</span></a>
+			  </li>
+			  <li><a href="index.php?status=cem_open">
+				<div class="icon-bg bg-pink"></div>
+				<span class="menu-title">CEM Open</span></a>   
+			  </li>
+			  <li><a href="index.php?status=open">
+				<div class="icon-bg bg-pink"></div>
+				<span class="menu-title">ME Open</span></a>   
+			  </li>
+			  <li><a href="index.php?status=done">
+				<div class="icon-bg bg-violet"></div>
+				<span class="menu-title">Done Request</span></a>
+			  </li>
+			  <li><a href="index.php?status=salary_issue">
+				<div class="icon-bg bg-blue"></div>
+				<span class="menu-title">Salary Issues</span></a>
+			  </li>
+			  <li><a href="index.php?status=not_interested">
+				<div class="icon-bg bg-blue"></div>
+				<span class="menu-title">Not Interested</span></a>
+			  </li>
+			  <li><a href="index.php?status=decay">
+				<div class="icon-bg bg-blue"></div>
+				<span class="menu-title">Decay Requests</span></a>
+			  </li>
+			  <li><a href="index.php?status=followback">
+				<div class="icon-bg bg-blue"></div>
+				<span class="menu-title">Follow back Requests</span></a>
+			  </li>
+			  <li><a href="24hour.php">
+				<div class="icon-bg bg-blue"></div>
+				<span class="menu-title">View 24hours Requests</span></a>
+			  </li>
+			  <li><a href="insert.php">
+				<div class="icon-bg bg-red"></div>
+				<span class="menu-title">Insert New Service Request</span></a>
+			  </li>
+			  <li><a href="area.php">
+				<div class="icon-bg bg-blue"></div>
+				<span class="menu-title">Print Area</span></a>
+			  </li>
+			</ul>
+        </div>
+      </nav>
             <!--END SIDEBAR MENU-->
             <!--BEGIN PAGE WRAPPER-->
-            <div id="page-wrapper">
-                <!--BEGIN TITLE & BREADCRUMB PAGE-->
-                <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
-                    <div class="page-header pull-left">
-                        <div class="page-title">BlueNet Hack</div>
-                    </div>
-                    <div class="clearfix">
-                    </div>
-                </div>
+	  <div id="page-wrapper">
+		<!--BEGIN TITLE & BREADCRUMB PAGE-->
+		<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+			<div class="page-header pull-left">
+				<div class="page-title">BlueNet Hack</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
                 <!--END TITLE & BREADCRUMB PAGE-->
-            </div>
-            <!--END PAGE WRAPPER-->
-            <div class="row">
-            <div class="col-lg-3"></div>
-			<div class="col-lg-9">
-			<div class="panel">
-				<div class="panel-body">
-            <table id="example1" class="display" cellspacing="0" width="100%">
+        <div class="page-content">
+          <div id="tab-general">
+            <div class="row mbl">
+            <div class="col-lg-12">
+			<div class="panel" >
+			<div class="panel-body">
+            <table id="example1" class="display" cellspacing="0" >
 	        <thead>
 	            <tr>
 	                <th>Name</th>
@@ -199,13 +196,16 @@
     	</div>
     	</div>
         </div>
+        </div>
+    </div>
     </div>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     
     <script type="text/javascript">
 		$(document).ready(function() {
-		    $('#example1').DataTable( {
-		    "iDisplayLength": 50 });
+		    $('#example1').DataTable( 
+		    {"iDisplayLength": 50 }
+		    );
 		} );
 	</script>
     <script src="script/jquery-migrate-1.2.1.min.js"></script>
@@ -224,7 +224,7 @@
     <script src="script/pace.min.js"></script>
     <script src="script/holder.js"></script>
     <script src="script/responsive-tabs.js"></script>
-    <script src="script/index.js"></script>
+   
     <!--CORE JAVASCRIPT-->
     <script src="script/main.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/s/dt/dt-1.10.10/datatables.min.js"></script>
