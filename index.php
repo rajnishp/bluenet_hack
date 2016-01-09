@@ -48,6 +48,9 @@
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/dt/dt-1.10.10/datatables.min.css"/> -->
 	
 </head>
+<style>
+	.row_style{max-width:42px;height:auto;}
+</style>
 <body>
    <div id="wrapper">
    <!--BEGIN SIDEBAR MENU-->
@@ -123,21 +126,21 @@
             <table id="example1" class="display" cellspacing="0" >
 	        <thead>
 	            <tr>
-	                <th>Name</th>
-	                <th>Mobile</th>
-	                <th>Requirement</th>
-	                <th>Gender</th>
-	                <th>Timing</th>
-	                <th>Salary</th>
-	                <th>Address</th>
-	                <th>Remarks</th>
-	                <th>Work Time</th>
-	                <th>Created Date</th>
-	                <th>Date</th>
-	                <th>Match 1</th>
-	                <th>Match 2</th>
-	                <th>Status</th>
-	                <th>Edit</th>
+	                <th class="row_style">Name</th>
+	                <th class="row_style">Mobile</th>
+	                <th class="row_style">Requirement</th>
+	                <th class="row_style">Gender</th>
+	                <th class="row_style">Timing</th>
+	                <th class="row_style">Salary</th>
+	                <th class="row_style">Address</th>
+	                <th class="row_style">Remarks</th>
+	                <th class="row_style">Work Time</th>
+	                <th class="row_style">Created Date</th>
+	                <th class="row_style">Date</th>
+	                <th class="row_style">Match 1</th>
+	                <th class="row_style">Match 2</th>	
+	                <th class="row_style">Status</th>
+	                <th class="row_style">Edit</th>
 	            </tr>
 	        </thead>
 	        <tbody>
@@ -151,20 +154,20 @@
 					while ($srsrow = mysqli_fetch_array($srs)){
 				?>
 	            <tr>					
-	                <td><?= $srsrow['name'] ?> </td>
-	                <td><?= $srsrow['mobile'] ?> </td>
-	                <td><?= $srsrow['requirements'] ?> </td>
-	                <td><?= $srsrow['gender'] ?> </td>
-	                <td><?= $srsrow['timings'] ?> </td>
-	                <td><?= $srsrow['expected_salary'] ?> </td>
-	                <td><?= $srsrow['address'] ?> </td>
-	                <td><?= $srsrow['remarks'] ?> </td>
-	                <td><?= $srsrow['work_time'] ?> </td>
-	                <td><?= $srsrow['created_time'] ?> </td>
-	                <td><?= $srsrow['date'] ?> </td>
-	                <td><?= $srsrow['match_name'] ?> <?= $srsrow['match_mobile'] ?> </td>
-	                <td><?= $srsrow['match2_name'] ?> <?= $srsrow['match2_mobile'] ?> </td>
-	                <td>
+	                <td class="row_style"><?= $srsrow['name'] ?> </td>
+	                <td class="row_style"><?= $srsrow['mobile'] ?> </td>
+	                <td class="row_style"><?= $srsrow['requirements'] ?> </td>
+	                <td class="row_style"><?= $srsrow['gender'] ?> </td>
+	                <td class="row_style"><?= $srsrow['timings'] ?> </td>
+	                <td class="row_style"><?= $srsrow['expected_salary'] ?> </td>
+	                <td class="row_style"><?= $srsrow['address'] ?> </td>
+	                <td class="row_style"><?= $srsrow['remarks'] ?> </td>
+	                <td class="row_style"><?= $srsrow['work_time'] ?> </td>
+	                <td class="row_style"><?= $srsrow['created_time'] ?> </td>
+	                <td class="row_style"><?= $srsrow['date'] ?> </td>
+	                <td class="row_style"><?= $srsrow['match_name'] ?> <?= $srsrow['match_mobile'] ?> </td>
+	                <td class="row_style"><?= $srsrow['match2_name'] ?> <?= $srsrow['match2_mobile'] ?> </td>
+	                <td class="row_style">
 	                	<form method="POST" action="">
 							<select name="new_status">
 								<option value="<?= $srsrow['status'] ?>" selected><?= $srsrow['status'] ?></option>
@@ -180,7 +183,7 @@
 							<button type="submit" name="update_status" class="btn btn-primary"> Update </button>
 						</form>
 	                </td>
-	                <td>
+	                <td class="row_style">
 						<form method="post" action="update.php?sr_id=<?= $srsrow['id'] ?>">
 							<button type="submit" name="update_sr" class="btn btn-primary"> Edit </button>
 						</form>
@@ -204,7 +207,8 @@
     <script type="text/javascript">
 		$(document).ready(function() {
 		    $('#example1').DataTable( 
-		    {"iDisplayLength": 50 }
+		    {"bAutoWidth": false, "iDisplayLength": 50,
+				"aoColumnDefs": [{ "sWidth": "30px", "aTargets": [ "_all" ] }]  }
 		    );
 		} );
 	</script>
