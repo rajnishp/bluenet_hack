@@ -56,7 +56,7 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 		if(mysqli_connect_errno()){		
 		}
 		else { 
-			header("Location: index.php"); 
+			//header("Location: index.php"); 
 		}
 	}
 	if (isset($_POST['add_note'])) {
@@ -66,7 +66,7 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 		if(mysqli_connect_errno()){		
 		}
 		else { 
-			header("Location: index.php"); 
+			//header("Location: index.php"); 
 		}
 	}
 ?>
@@ -136,7 +136,7 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
                     </li>
                     <li><a href="index.php?status=open">
                         <div class="icon-bg bg-pink"></div>
-						<span class="menu-title">Open Requests</span></a>   
+						<span class="menu-title">ME Open</span></a>   
                     </li>
                     <li><a href="index.php?status=done">
                         <div class="icon-bg bg-violet"></div>

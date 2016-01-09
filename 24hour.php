@@ -60,7 +60,7 @@
                     </li>
                     <li><a href="index.php?status=open">
                         <div class="icon-bg bg-pink"></div>
-						<span class="menu-title">Open Requests</span></a>   
+						<span class="menu-title">ME Open</span></a>   
                     </li>
                     <li><a href="index.php?status=done">
                         <div class="icon-bg bg-violet"></div>

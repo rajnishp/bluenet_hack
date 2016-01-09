@@ -1,6 +1,6 @@
 <?php
 
-	$db_handle = mysqli_connect("localhost","root","redhat111111","bluenethack");
+	$db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 
 //Check connection
 	if (mysqli_connect_errno()) {
@@ -16,7 +16,7 @@
 		if(mysqli_connect_errno()){		
 		}
 		else { 
-			header("Location: index.php"); 
+			//header("Location: #"); 
 		}
 	}
 ?>
@@ -67,7 +67,7 @@
                     </li>
                     <li><a href="index.php?status=open">
                         <div class="icon-bg bg-pink"></div>
-						<span class="menu-title">Open Requests</span></a>   
+						<span class="menu-title">ME Open</span></a>   
                     </li>
                     <li><a href="index.php?status=done">
                         <div class="icon-bg bg-violet"></div>
@@ -146,7 +146,7 @@
 	        <tbody>
 				<?php
 					if(isset($status)){
-						$srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE status = '$status'; ") ;
+						$srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE status = '$status' AND work_time !='24'; ") ;
 					}
 					else {
 						$srs = mysqli_query($db_handle, "SELECT * FROM service_request ") ;
