@@ -118,8 +118,11 @@
                 <!--END TITLE & BREADCRUMB PAGE-->
             </div>
             <!--END PAGE WRAPPER-->
+            <div class="row">
             <div class="col-lg-3"></div>
 			<div class="col-lg-9">
+			<div class="panel">
+				<div class="panel-body">
             <table id="example1" class="display" cellspacing="0" width="100%">
 	        <thead>
 	            <tr>
@@ -191,6 +194,9 @@
 				?>
 	        </tbody>
     	</table>
+    	</div>
+    	</div>
+    	</div>
     	</div>
         </div>
     </div>
