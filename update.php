@@ -132,67 +132,70 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
                 <ul id="side-menu" class="nav">      
                      <div class="clearfix"></div>
                     <li class="active"><a href="request.php">
-				<div class="icon-bg bg-orange"></div>
+				<div class="icon-bg bg-orange"></div><i class="glyphicon glyphicon-home"></i>
 				<span class="menu-title">View all request</span></a>
 			  </li>
 			  <li><a href="request.php?status=cem_open">
-				<div class="icon-bg bg-pink"></div>
+				<div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-user"></i>
 				<span class="menu-title">CEM Open</span></a>   
 			  </li>
 			  <li><a href="request.php?status=open">
-				<div class="icon-bg bg-pink"></div>
+				<div class="icon-bg bg-pink"></div><i class="glyphicon glyphicon-search"></i>
 				<span class="menu-title">ME Open</span></a>   
 			  </li>
 			  <li><a href="request.php?status=done">
-				<div class="icon-bg bg-violet"></div>
+				<div class="icon-bg bg-violet"></div><i class="glyphicon glyphicon-ok"></i>
 				<span class="menu-title">Done Request</span></a>
 			  </li>
 			  <li><a href="request.php?status=salary_issue">
-				<div class="icon-bg bg-blue"></div>
+				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-usd"></i>
 				<span class="menu-title">Salary Issues</span></a>
 			  </li>
 			  <li><a href="request.php?status=delete">
-				<div class="icon-bg bg-blue"></div>
+				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-remove"></i>
 				<span class="menu-title">Deleted Requests</span></a>
 			  </li>
 			  <li><a href="request.php?status=not_interested">
-				<div class="icon-bg bg-blue"></div>
+				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-exclamation-sign"></i>
 				<span class="menu-title">Not Interested</span></a>
 			  </li>
 			  <li><a href="request.php?status=decay">
-				<div class="icon-bg bg-blue"></div>
+				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-trash"></i>
 				<span class="menu-title">Decay Requests</span></a>
 			  </li>
 			  <li><a href="request.php?status=followback">
-				<div class="icon-bg bg-blue"></div>
+				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-repeat"></i>
 				<span class="menu-title">Follow back Requests</span></a>
 			  </li>
-                    <li><a href="24hour.php">
-                        <div class="icon-bg bg-blue"></div>
-						<span class="menu-title">View 24hours Requests</span></a>
-                    </li>
-                    <li><a href="insert.php">
-                        <div class="icon-bg bg-red"></div>
-						<span class="menu-title">Insert New Service Request</span></a>
-                    </li>
-                    <li><a href="area.php">
-                        <div class="icon-bg bg-blue"></div>
-						<span class="menu-title">Print Area</span></a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+			  <li><a href="24hour.php">
+				<div class="icon-bg bg-blue"></div><i class=" glyphicon glyphicon-time"></i>
+				<span class="menu-title">View 24hours Requests</span></a>
+			  </li>
+			  <li><a href="insert.php">
+				<div class="icon-bg bg-red"></div><i class="glyphicon glyphicon-plus"></i>
+				<span class="menu-title">Insert New Service Request</span></a>
+			  </li>
+			  <li><a href="area.php">
+				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-print"></i>
+				<span class="menu-title">Print Area</span></a>
+			  </li>
+			</ul>
+        </div>
+      </nav>
             <!--END SIDEBAR MENU-->
             <!--BEGIN PAGE WRAPPER-->
-            <div id="page-wrapper">
-                <!--BEGIN TITLE & BREADCRUMB PAGE-->
-                <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
-                    <div class="page-header pull-left">
-                        <div class="page-title">BlueNet Hack</div>
-                    </div>
-                    <ol class="breadcrumb page-breadcrumb pull-right">
-						 <li><a href="logout.php">Logout</a></li>
-					</ol>
+	 <div id="page-wrapper">
+		<!--BEGIN TITLE & BREADCRUMB PAGE-->
+		<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+			<div class="page-header pull-left">
+				<div class="page-title">BlueNet Hack</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a id="menu-toggle" href="#" class="hidden-xs"><i class="glyphicon glyphicon-th-list"></i></a>
+			</div>
+			<ol class="breadcrumb page-breadcrumb pull-right">
+                 <li><a href="logout.php">Logout</a></li>
+                 <li></li>
+                 <li><?= strtoupper($_SESSION['first_name']) ?></li>
+            </ol>
                     <div class="clearfix">
                     </div>
                 </div>
