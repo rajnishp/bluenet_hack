@@ -65,7 +65,8 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 	if (isset($_POST['add_note'])) {
 		$note = $_POST['noteVal'];
 		$sr_id = $_GET['sr_id'];
-		$sql = mysqli_query ($db_handle, "INSERT INTO notes (sr_id, note) VALUES ('$sr_id', '$note') ;") ;
+		$user_id = $_SESSION['user_id'];
+		$sql = mysqli_query ($db_handle, "INSERT INTO notes (sr_id, note, cem_id) VALUES ('$sr_id', '$note', '$user_id') ;") ;
 		if(mysqli_connect_errno()){		
 		}
 		else { 

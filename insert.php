@@ -25,14 +25,15 @@ if (isset($_POST['insert'])) {
 	$created_time = $_POST['created_time'];
 	$worker_area = $_POST['worker_area'];
 	$gender = $_POST['gender'];
+	$user_id = $_SESSION['user_id'];
 	$skill = count($_POST['skill']);
 	for($i=0; $i < $skill; $i++) {
       $requirement .= ", ".$_POST['skill'][$i];
     }
     $str2 = substr($requirement, 1); 
-	$sql = mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, expected_salary, address, area, 
+	$sql = mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, expected_salary, address, area, user_id,
 										remarks, status, worker_area, work_time, created_time)	VALUES ('$name','$mobile','$str2','$gender','$timing',
-										'$salary', '$address', '$area','$remarks', '$status', '$worker_area', '$time', '$created_time');");
+										'$salary', '$address', '$area','$user_id','$remarks', '$status', '$worker_area', '$time', '$created_time');");
 	$sr_id = mysqli_insert_id($db_handle);
 	$eachworkarea = explode(",", $worker_area);
 	foreach ($eachworkarea as $workareas) {
