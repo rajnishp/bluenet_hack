@@ -9,6 +9,9 @@ $db_handle = mysqli_connect($config['host'], $config['user'], $config['password'
 if (mysqli_connect_errno()) {
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
+if (!isset($_SESSION['user_id'])) {  
+		header('Location: index.php');
+	}
 if (isset($_POST['insert'])) {
 	$name = $_POST['name'];
 	$mobile = $_POST['mobile'];
@@ -16,6 +19,7 @@ if (isset($_POST['insert'])) {
 	$timing = $_POST['timing'];
 	$salary = $_POST['salary'];
 	$area = $_POST['area'];
+	$status = $_POST['new_status'];
 	$remarks = $_POST['remarks'];
 	$time = $_POST['work_time'];
 	$created_time = $_POST['created_time'];
@@ -27,8 +31,8 @@ if (isset($_POST['insert'])) {
     }
     $str2 = substr($requirement, 1); 
 	$sql = mysqli_query ($db_handle, "INSERT INTO service_request (name, mobile, requirements, gender, timings, expected_salary, address, area, 
-										remarks, worker_area, work_time, created_time)	VALUES ('$name','$mobile','$str2','$gender','$timing','$salary',
-										'$address', '$area','$remarks', '$worker_area', '$time', '$created_time');");
+										remarks, status, worker_area, work_time, created_time)	VALUES ('$name','$mobile','$str2','$gender','$timing',
+										'$salary', '$address', '$area','$remarks', '$status', '$worker_area', '$time', '$created_time');");
 	$sr_id = mysqli_insert_id($db_handle);
 	$eachworkarea = explode(",", $worker_area);
 	foreach ($eachworkarea as $workareas) {
@@ -82,38 +86,42 @@ if (isset($_POST['insert'])) {
             <div class="sidebar-collapse menu-scroll">
                 <ul id="side-menu" class="nav">      
                      <div class="clearfix"></div>
-                    <li class="active"><a href="index.php">
-                        <div class="icon-bg bg-orange"></div>
-						<span class="menu-title">View all request</span></a>
-                    </li>
-                    <li><a href="index.php?status=cem_open">
-                        <div class="icon-bg bg-pink"></div>
-						<span class="menu-title">CEM Open</span></a>   
-                    </li>
-                    <li><a href="index.php?status=open">
-                        <div class="icon-bg bg-pink"></div>
-						<span class="menu-title">ME Open</span></a>   
-                    </li>
-                    <li><a href="index.php?status=done">
-                        <div class="icon-bg bg-violet"></div>
-						<span class="menu-title">Done Request</span></a>
-                    </li>
-                    <li><a href="index.php?status=salary_issue">
-                        <div class="icon-bg bg-blue"></div>
-						<span class="menu-title">Salary Issues</span></a>
-                    </li>
-                    <li><a href="index.php?status=not_interested">
-                        <div class="icon-bg bg-blue"></div>
-						<span class="menu-title">Not Interested</span></a>
-                    </li>
-                    <li><a href="index.php?status=decay">
-                        <div class="icon-bg bg-blue"></div>
-						<span class="menu-title">Decay Requests</span></a>
-                    </li>
-                    <li><a href="index.php?status=followback">
-                        <div class="icon-bg bg-blue"></div>
-						<span class="menu-title">Follow back Requests</span></a>
-                    </li>
+                    <li class="active"><a href="request.php">
+				<div class="icon-bg bg-orange"></div>
+				<span class="menu-title">View all request</span></a>
+			  </li>
+			  <li><a href="request.php?status=cem_open">
+				<div class="icon-bg bg-pink"></div>
+				<span class="menu-title">CEM Open</span></a>   
+			  </li>
+			  <li><a href="request.php?status=open">
+				<div class="icon-bg bg-pink"></div>
+				<span class="menu-title">ME Open</span></a>   
+			  </li>
+			  <li><a href="request.php?status=done">
+				<div class="icon-bg bg-violet"></div>
+				<span class="menu-title">Done Request</span></a>
+			  </li>
+			  <li><a href="request.php?status=salary_issue">
+				<div class="icon-bg bg-blue"></div>
+				<span class="menu-title">Salary Issues</span></a>
+			  </li>
+			  <li><a href="request.php?status=delete">
+				<div class="icon-bg bg-blue"></div>
+				<span class="menu-title">Deleted Requests</span></a>
+			  </li>
+			  <li><a href="request.php?status=not_interested">
+				<div class="icon-bg bg-blue"></div>
+				<span class="menu-title">Not Interested</span></a>
+			  </li>
+			  <li><a href="request.php?status=decay">
+				<div class="icon-bg bg-blue"></div>
+				<span class="menu-title">Decay Requests</span></a>
+			  </li>
+			  <li><a href="request.php?status=followback">
+				<div class="icon-bg bg-blue"></div>
+				<span class="menu-title">Follow back Requests</span></a>
+			  </li>
                     <li><a href="24hour.php">
                         <div class="icon-bg bg-blue"></div>
 						<span class="menu-title">View 24hours Requests</span></a>
@@ -137,6 +145,9 @@ if (isset($_POST['insert'])) {
                     <div class="page-header pull-left">
                         <div class="page-title">BlueNet Hack</div>
                     </div>
+                    <ol class="breadcrumb page-breadcrumb pull-right">
+						 <li><a href="logout.php">Logout</a></li>
+					</ol>
                     <div class="clearfix">
                     </div>
                 </div>
@@ -218,6 +229,21 @@ if (isset($_POST['insert'])) {
 				        	<input type="text" name ="worker_area" class="form-control" placeholder="Worker Area" />
 				      	</div>
 				    </div>
+				    <div class="form-group">
+				      	<label class="col-md-3 control-label">Status</label>
+							<div class="col-md-3">
+								<select name="new_status">
+									<option value="open" selected>Open</option>
+									<option value="followback">Followback</option>
+									<option value="cem_open" >CEM - Open</option>
+									<option value="salary_issue" >Salary Issues</option>
+									<option value="not_interested" >Not Interested</option>
+									<option value="done" >Done</option>
+									<option value="decay" >Decay</option>
+									<option value="delete" >Delete</option>
+								</select>
+							</div>
+					</div>
 				    <div class="form-group">
 					    <label class="col-md-3 control-label"></label>
 					    <div class="col-md-7">

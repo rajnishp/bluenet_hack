@@ -6,6 +6,8 @@ session_start();
 	if (mysqli_connect_errno()) {
 	  	echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
+
+	$status = $_GET["status"];
 	if (!isset($_SESSION['user_id'])) {  
 		header('Location: index.php');
 	}
@@ -20,7 +22,7 @@ session_start();
 		if(mysqli_connect_errno()){		
 		}
 		else { 
-			//header("Location: request.php"); 
+			//header("Location: #"); 
 		}
 	}
 ?>
@@ -48,10 +50,13 @@ session_start();
     <link type="text/css" rel="stylesheet" href="styles/pace.css">
     <link type="text/css" rel="stylesheet" href="styles/jquery.news-ticker.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css"/>
-    <style>
+	
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/dt/dt-1.10.10/datatables.min.css"/> -->
+	
+</head>
+<style>
 	.row_style{max-width:42px;height:auto;}
 </style>
-</head>
 <body>
    <div id="wrapper">
    <!--BEGIN SIDEBAR MENU-->
@@ -119,9 +124,9 @@ session_start();
 				<div class="page-title">BlueNet Hack</div>
 			</div>
 			<ol class="breadcrumb page-breadcrumb pull-right">
-				 <li><a href="logout.php">Logout</a></li>
-			</ol>
-			<div class="clearfix"></div>
+                 <li><a href="logout.php">Logout</a></li>
+            </ol>
+			<div class="clearfix "></div>
 		</div>
                 <!--END TITLE & BREADCRUMB PAGE-->
         <div class="page-content">
@@ -130,7 +135,7 @@ session_start();
 				<div class="col-lg-12">
 					<div class="panel" >
 						<div class="panel-body">
-							<table id="example" class="display" cellspacing="0" >
+							<table id="example1" class="display" cellspacing="0" >
 								<thead>
 									<tr>
 										<th class="row_style">Name</th>
@@ -150,11 +155,16 @@ session_start();
 										<th class="row_style">Edit</th>
 									</tr>
 								</thead>
-								<tbody>				
-				<?php
-					$srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE work_time ='24'; ") ;
-					while ($srsrow = mysqli_fetch_array($srs)){
-				?>
+								<tbody>
+									<?php
+										if(isset($status)){
+											$srs = mysqli_query($db_handle, "SELECT * FROM service_request WHERE status = '$status' AND work_time !='24'; ") ;
+										}
+										else {
+											$srs = mysqli_query($db_handle, "SELECT * FROM service_request ") ;
+										}
+										while ($srsrow = mysqli_fetch_array($srs)){
+									?>
 									<tr>					
 										<td class="row_style"><?= $srsrow['name'] ?> </td>
 										<td class="row_style"><?= $srsrow['mobile'] ?> </td>
@@ -206,11 +216,11 @@ session_start();
       </div>
     </div>
    </div>
-     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     
     <script type="text/javascript">
 		$(document).ready(function() {
-		    $('#example').DataTable( 
+		    $('#example1').DataTable( 
 		    {"bAutoWidth": false, "iDisplayLength": 50,
 				"aoColumnDefs": [{ "sWidth": "30px", "aTargets": [ "_all" ] }]  }
 		    );
@@ -238,4 +248,3 @@ session_start();
     <script type="text/javascript" src="https://cdn.datatables.net/s/dt/dt-1.10.10/datatables.min.js"></script>
 </body>
 </html>
-

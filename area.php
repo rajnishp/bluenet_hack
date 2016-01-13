@@ -1,10 +1,13 @@
 <?php
-
+session_start();
 	$db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 
 //Check connection
 	if (mysqli_connect_errno()) {
 	  	echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	}
+	if (!isset($_SESSION['user_id'])) {  
+		header('Location: index.php');
 	}
 ?>
 
@@ -39,38 +42,42 @@
             <div class="sidebar-collapse menu-scroll">
                 <ul id="side-menu" class="nav">      
                      <div class="clearfix"></div>
-                    <li class="active"><a href="index.php">
-                        <div class="icon-bg bg-orange"></div>
-						<span class="menu-title">View all request</span></a>
-                    </li>
-                    <li><a href="index.php?status=cem_open">
-                        <div class="icon-bg bg-pink"></div>
-						<span class="menu-title">CEM Open</span></a>   
-                    </li>
-                    <li><a href="index.php?status=open">
-                        <div class="icon-bg bg-pink"></div>
-						<span class="menu-title">ME Open</span></a>   
-                    </li>
-                    <li><a href="index.php?status=done">
-                        <div class="icon-bg bg-violet"></div>
-						<span class="menu-title">Done Request</span></a>
-                    </li>
-                    <li><a href="index.php?status=salary_issue">
-                        <div class="icon-bg bg-blue"></div>
-						<span class="menu-title">Salary Issues</span></a>
-                    </li>
-                    <li><a href="index.php?status=not_interested">
-                        <div class="icon-bg bg-blue"></div>
-						<span class="menu-title">Not Interested</span></a>
-                    </li>
-                    <li><a href="index.php?status=decay">
-                        <div class="icon-bg bg-blue"></div>
-						<span class="menu-title">Decay Requests</span></a>
-                    </li>
-                    <li><a href="index.php?status=followback">
-                        <div class="icon-bg bg-blue"></div>
-						<span class="menu-title">Follow back Requests</span></a>
-                    </li>
+                    <li class="active"><a href="request.php">
+				<div class="icon-bg bg-orange"></div>
+				<span class="menu-title">View all request</span></a>
+			  </li>
+			  <li><a href="request.php?status=cem_open">
+				<div class="icon-bg bg-pink"></div>
+				<span class="menu-title">CEM Open</span></a>   
+			  </li>
+			  <li><a href="request.php?status=open">
+				<div class="icon-bg bg-pink"></div>
+				<span class="menu-title">ME Open</span></a>   
+			  </li>
+			  <li><a href="request.php?status=done">
+				<div class="icon-bg bg-violet"></div>
+				<span class="menu-title">Done Request</span></a>
+			  </li>
+			  <li><a href="request.php?status=salary_issue">
+				<div class="icon-bg bg-blue"></div>
+				<span class="menu-title">Salary Issues</span></a>
+			  </li>
+			  <li><a href="request.php?status=delete">
+				<div class="icon-bg bg-blue"></div>
+				<span class="menu-title">Deleted Requests</span></a>
+			  </li>
+			  <li><a href="request.php?status=not_interested">
+				<div class="icon-bg bg-blue"></div>
+				<span class="menu-title">Not Interested</span></a>
+			  </li>
+			  <li><a href="request.php?status=decay">
+				<div class="icon-bg bg-blue"></div>
+				<span class="menu-title">Decay Requests</span></a>
+			  </li>
+			  <li><a href="request.php?status=followback">
+				<div class="icon-bg bg-blue"></div>
+				<span class="menu-title">Follow back Requests</span></a>
+			  </li>
                     <li><a href="24hour.php">
                         <div class="icon-bg bg-blue"></div>
 						<span class="menu-title">View 24hours Requests</span></a>
@@ -94,6 +101,9 @@
                     <div class="page-header pull-left">
                         <div class="page-title">BlueNet Hack</div>
                     </div>
+                    <ol class="breadcrumb page-breadcrumb pull-right">
+						 <li><a href="logout.php">Logout</a></li>
+					</ol>
                     <div class="clearfix">
                     </div>
                 </div>

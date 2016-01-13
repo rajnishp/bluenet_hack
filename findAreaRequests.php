@@ -1,12 +1,15 @@
 <?php
 //add how much old is request
-
+session_start();
 $area = $_GET['area'];
 
 $mysqli = new mysqli('localhost','root','redhat@11111p', 'bluenethack');
 	if ($mysqli->connect_errno) {
     	echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 		return 1;
+	}
+	if (!isset($_SESSION['user_id'])) {  
+		header('Location: index.php');
 	}
 /* 
 
