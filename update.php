@@ -44,14 +44,15 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 											worker_area='$worker_area', work_time='$work_time', created_time='$created_time' WHERE id='$sr_id' ;");
 		$eachworkarea = explode(",", $worker_area);
 		foreach ($eachworkarea as $workareas) {
-			$workarea = mysqli_query ($db_handle, "SELECT * FROM area WHERE name='$workareas');");
+			$newarea = trim($workareas);
+			$workarea = mysqli_query ($db_handle, "SELECT * FROM area WHERE name='$newarea');");
 			if(mysqli_num_rows($workarea) != 0){
 				$areas = mysqli_fetch_array($workarea);
 				$area_id = $areas['id'];
 				$sql = mysqli_query ($db_handle, "INSERT INTO sr_area (id, sr_id) VALUES ('$area_id', '$sr_id');");
 			}
 			else {
-				$sql = mysqli_query ($db_handle, "INSERT INTO area (name) VALUES ('$workareas');");
+				$sql = mysqli_query ($db_handle, "INSERT INTO area (name) VALUES ('$newarea');");
 				$area_id = mysqli_insert_id($db_handle);
 				$sql = mysqli_query ($db_handle, "INSERT INTO sr_area (id, sr_id) VALUES ('$area_id', '$sr_id');");
 			}

@@ -121,10 +121,13 @@ session_start();
 		<!--BEGIN TITLE & BREADCRUMB PAGE-->
 		<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
 			<div class="page-header pull-left">
-				<div class="page-title">BlueNet Hack</div>
+				<div class="page-title">BlueNet Hack</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a id="menu-toggle" href="#" class="hidden-xs"><i class="glyphicon glyphicon-th-list"></i></a>
 			</div>
 			<ol class="breadcrumb page-breadcrumb pull-right">
                  <li><a href="logout.php">Logout</a></li>
+                 <li></li>
+                 <li><?= strtoupper($_SESSION['first_name']) ?></li>
             </ol>
 			<div class="clearfix "></div>
 		</div>
@@ -221,8 +224,7 @@ session_start();
     <script type="text/javascript">
 		$(document).ready(function() {
 		    $('#example1').DataTable( 
-		    {"bAutoWidth": false, "iDisplayLength": 50,
-				"aoColumnDefs": [{ "sWidth": "30px", "aTargets": [ "_all" ] }]  }
+		    {"iDisplayLength": 50}
 		    );
 		} );
 	</script>
