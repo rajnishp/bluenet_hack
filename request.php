@@ -191,6 +191,7 @@ session_start();
 													<option value="cem_open" >CEM - Open</option>
 													<option value="salary_issue" >Salary Issues</option>
 													<option value="not_interested" >Not Interested</option>
+													<option value="just_to_know" >Only Information Purpose</option>
 													<option value="done" >Done</option>
 													<option value="decay" >Decay</option>
 													<option value="delete" >Delete</option>

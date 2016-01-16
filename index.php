@@ -15,13 +15,14 @@ session_start();
 		$lastname = mysqli_real_escape_string($db_handle, $_POST['lastname']);
 		$email = mysqli_real_escape_string($db_handle, $_POST['email']);
 		$phone = mysqli_real_escape_string($db_handle, $_POST['phone']);
+		$employee_type = mysqli_real_escape_string($db_handle, $_POST['employee_type']);
 		$pas = mysqli_real_escape_string($db_handle, $_POST['password']) ;
 		$awe = mysqli_real_escape_string($db_handle, $_POST['password2']) ;
 	
 		if ( $pas == $awe ) {
 			$pas = md5($pas);
-			mysqli_query($db_handle,"INSERT INTO user(first_name, last_name, email, phone, password) 
-												VALUES ('$firstname', '$lastname', '$email', '$phone', '$pas') ; ") ;		
+			mysqli_query($db_handle,"INSERT INTO user(first_name, last_name, email, phone, password, employee_type) 
+												VALUES ('$firstname', '$lastname', '$email', '$phone', '$pas', '$employee_type') ; ") ;		
 			$user_create_id = mysqli_insert_id($db_handle);
 			
 			if(mysqli_error($db_handle)){ echo "Please Try Again"; } 
@@ -113,7 +114,19 @@ session_start();
                         </div>
                     </div><br/><br> 
                     <input type="text" class="form-control" style="width: 98%" name="email" placeholder="Email" /><br/>                   
-                    <input type="text" class="form-control" style="width: 98%" name="phone" placeholder="Mobile Number" /><br/>                   
+                    <input type="text" class="form-control" style="width: 98%" name="phone" placeholder="Mobile Number" /><br/> 
+                    <div class="input-group">
+                       <span class="input-group-addon">Designation</span>
+						<select name="employee_type">
+							<option value="operator">Operator</option>
+							<option value="me">Marketing Executive</option>
+							<option value="cem" >Client Engagement Manager</option>
+							<option value="admin" >Admin</option>
+							<option value="accountant" >Accountant</option>
+							<option value="ba" >Business Analyst</option>
+							<option value="dev" >Developer</option>
+						</select> 
+					</div><br/>                 
                     <div>
                         <div class="col-md-6" style="padding-left: 0px;">
                             <input type="password" class="form-control" style="width: 100%" name="password" placeholder="password"/>

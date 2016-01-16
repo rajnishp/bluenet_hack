@@ -3,7 +3,7 @@ session_start();
 $start = time() ;
 $config['host'] = "localhost" ;
 $config['user'] = "root" ;
-$config['password'] = "redhat@111111p" ;
+$config['password'] = "redhat@11111p" ;
 $config['database'] = "bluenethack" ;
 $db_handle = mysqli_connect($config['host'], $config['user'], $config['password'], $config['database']);
 if (mysqli_connect_errno()) {
@@ -243,6 +243,7 @@ if (isset($_POST['insert'])) {
 									<option value="cem_open" >CEM - Open</option>
 									<option value="salary_issue" >Salary Issues</option>
 									<option value="not_interested" >Not Interested</option>
+									<option value="just_to_know" >Only Information Purpose</option>
 									<option value="done" >Done</option>
 									<option value="decay" >Decay</option>
 									<option value="delete" >Delete</option>
