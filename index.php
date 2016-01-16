@@ -1,6 +1,6 @@
 <?php
 session_start();
-	$db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
+	$db_handle = mysqli_connect("localhost","root","redhat111111","bluenethack");
 
 //Check connection
 	if (mysqli_connect_errno()) {
@@ -18,27 +18,30 @@ session_start();
 		$employee_type = mysqli_real_escape_string($db_handle, $_POST['employee_type']);
 		$pas = mysqli_real_escape_string($db_handle, $_POST['password']) ;
 		$awe = mysqli_real_escape_string($db_handle, $_POST['password2']) ;
-	
-		if ( $pas == $awe ) {
-			$pas = md5($pas);
-			mysqli_query($db_handle,"INSERT INTO user(first_name, last_name, email, phone, password, employee_type) 
-												VALUES ('$firstname', '$lastname', '$email', '$phone', '$pas', '$employee_type') ; ") ;		
-			$user_create_id = mysqli_insert_id($db_handle);
-			
-			if(mysqli_error($db_handle)){ echo "Please Try Again"; } 
-			else {
-				$_SESSION['user_id'] = $user_create_id;
-				$_SESSION['first_name'] = $firstname ;
-				$_SESSION['email'] = $email;
-				header("Location: request.php");
+		if((strlen($firstname)< 2) OR (strlen($lastname)< 2) OR (strlen($email)< 8) OR (strlen($phone)< 10) OR (strlen($pas)< 4)) {
+			echo "Something went wrong, Try again";
+		}
+		else {
+			if ( $pas == $awe ) {
+				$pas = md5($pas);
+				mysqli_query($db_handle,"INSERT INTO user(first_name, last_name, email, phone, password, employee_type) 
+													VALUES ('$firstname', '$lastname', '$email', '$phone', '$pas', '$employee_type') ; ") ;		
+				$user_create_id = mysqli_insert_id($db_handle);
+				
+				if(mysqli_error($db_handle)){ echo "Please Try Again"; } 
+				else {
+					$_SESSION['user_id'] = $user_create_id;
+					$_SESSION['first_name'] = $firstname ;
+					$_SESSION['email'] = $email;
+					header("Location: request.php");
+				}
+			}
+			else {  
+				//header('Location: ./index.php?status=1');
+				echo "Password do not match, Try again";
 			}
 		}
-		else {  
-			//header('Location: ./index.php?status=1');
-			echo "Password do not match, Try again";
-		}
-	
-}
+	}
 
 	if (isset($_POST['login'])) {
 		$email = mysqli_real_escape_string($db_handle, $_POST['username']); 
