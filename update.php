@@ -159,6 +159,10 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-exclamation-sign"></i>
 				<span class="menu-title">Not Interested</span></a>
 			  </li>
+			  <li><a href="request.php?status=just_to_know">
+				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-pencil"></i>
+				<span class="menu-title">Only Information Purpose</span></a>
+			  </li>
 			  <li><a href="request.php?status=decay">
 				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-trash"></i>
 				<span class="menu-title">Decay Requests</span></a>
