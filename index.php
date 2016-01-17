@@ -87,64 +87,18 @@ session_start();
 	
 </head>
 <body>
-<div class="row" style="background-image: url(img/collaboration.jpg); margin-top:0px; margin-left:0px; height: 600px; width: 100%;">
-        <div class = "col-xs-7 col-ls-8"></div>	
+	<div class="row" >
+        <div class = "col-xs-3 col-ls-3"></div>
         <div class = "col-xs-2 col-ls-4" style="width:350px; margin-top:85px; background-color: #F8F8F8 ;">
-<!-- signin signup nav tabs starts ---->            
-            <ul class="nav nav-tabs" role="tablist" style="font-size:14px; margin-bottom: 0px; margin-top: 12px;">
-                <li role="presentation" class="active" id="signup_modal">
-                    <a href="#tabSignup" role="tab" data-toggle="tab">
-                        SignUp 
-                    </a>
-                </li>
-                <li role="presentation" id="signin_modal">
-                    <a href="#tabSignIn" role="tab" data-toggle="tab">
-                        SignIn
-                    </a>
+			<ul class="nav nav-tabs" role="tablist" style="font-size:14px; margin-bottom: 0px; margin-top: 12px;">
+				<li role="presentation" class="active" id="signup_modal">
+					<a href="#tabSignup" role="tab" data-toggle="tab">SignIn</a>
                 </li>
             </ul>
-
-            <div class="tab-content" style="margin-bottom: 12px">
-                <div role="tabpanel" class="row tab-pane active" id="tabSignup" style="line-height: 2;">  
-                    <p align="center"><font size="5" >Let's Collaborate!!</font></p><br>
-                    <form method="post">                    
-                    <div>
-                        <div class="col-md-6" style="padding-left: 0px;">                  
-                            <input type="text" class="form-control" style="width: 100%" name="firstname" placeholder="First name" />  
-                        </div>
-                        <div class="col-md-6" style="padding-left: 0px;">
-                            <input type="text" class="form-control" style="width: 100%" name="lastname" placeholder="Last name" />                    
-                        </div>
-                    </div><br/><br> 
-                    <input type="text" class="form-control" style="width: 98%" name="email" placeholder="Email" /><br/>                   
-                    <input type="text" class="form-control" style="width: 98%" name="phone" placeholder="Mobile Number" /><br/> 
-                    <div class="input-group">
-                       <span class="input-group-addon">Designation</span>
-						<select name="employee_type">
-							<option value="operator">Operator</option>
-							<option value="me">Marketing Executive</option>
-							<option value="cem" >Client Engagement Manager</option>
-							<option value="admin" >Admin</option>
-							<option value="accountant" >Accountant</option>
-							<option value="ba" >Business Analyst</option>
-							<option value="dev" >Developer</option>
-						</select> 
-					</div><br/>                 
-                    <div>
-                        <div class="col-md-6" style="padding-left: 0px;">
-                            <input type="password" class="form-control" style="width: 100%" name="password" placeholder="password"/>
-                        </div>
-                        <div class="col-md-6" style="padding-left: 0px;">
-                            <input type="password" class="form-control" style="width: 100%" name="password2" placeholder="Re-enter password"/><br/><br/>
-                        </div>
-                    </div>
-                    <input type="submit" class="btn btn-primary btn-lg" name = "request" value = "Sign up" >
-                    </form>
-                </div>     
-                
-                <div role="tabpanel" class="row tab-pane" id="tabSignIn" >
+			<div class="tab-content" style="margin-bottom: 12px">         
+				<div role="tabpanel" class="row tab-pane active" id="tabSignup" style="line-height: 2;" >
                     <p align="center"><font size="5" >Sign In for Blueteam</font></p></br>
-                        <form method="post">
+                    <form method="post">
                         <div class="input-group">
                             <span class="input-group-addon">Email</span>
                             <input type="text" class="form-control" name="username" placeholder="Email ">
@@ -156,7 +110,42 @@ session_start();
                         </div><br/>
                         <input type="submit" class="btn btn-success btn-lg" name = "login" value = "Log in" >
                     </form>
-                  </div>        
+                </div>  
+            </div>  
+        </div>	
+        <div class = "col-xs-1 col-ls-1"></div>
+        <div class = "col-xs-2 col-ls-4" style="width:350px; margin-top:85px; background-color: #F8F8F8 ;">
+<!-- signin signup nav tabs starts ---->            
+            <ul class="nav nav-tabs" role="tablist" style="font-size:14px; margin-bottom: 0px; margin-top: 12px;">
+                <li role="presentation" class="active" id="signup_modal">
+                    <a href="#tabSignup" role="tab" data-toggle="tab">SignUp</a>
+                </li>
+            </ul>
+            <div class="tab-content" style="margin-bottom: 12px">
+                <div role="tabpanel" class="row tab-pane active" id="tabSignup" style="line-height: 2;">  
+                    <p align="center"><font size="5" >Let's Collaborate!!</font></p><br>
+                    <form method="post">                    
+						<div>
+							<div class="col-md-6" style="padding-left: 0px;">                  
+								<input type="text" class="form-control" style="width: 100%" name="firstname" placeholder="First name" />  
+							</div>
+							<div class="col-md-6" style="padding-left: 0px;">
+								<input type="text" class="form-control" style="width: 100%" name="lastname" placeholder="Last name" />                    
+							</div>
+						</div><br/><br> 
+						<input type="text" class="form-control" style="width: 98%" name="email" placeholder="Email" /><br/>                   
+						<input type="text" class="form-control" style="width: 98%" name="phone" placeholder="Mobile Number" /><br/>                   
+						<div>
+							<div class="col-md-6" style="padding-left: 0px;">
+								<input type="password" class="form-control" style="width: 100%" name="password" placeholder="password"/>
+							</div>
+							<div class="col-md-6" style="padding-left: 0px;">
+								<input type="password" class="form-control" style="width: 100%" name="password2" placeholder="Re-enter password"/><br/><br/>
+							</div>
+						</div>
+						<input type="submit" class="btn btn-primary btn-lg" name = "request" value = "Sign up" >
+                    </form>
+                </div>           
             </div>
         </div>
     </div>
