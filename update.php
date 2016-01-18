@@ -36,7 +36,7 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 		$sr_id = $_GET['sr_id'];
 		$match_mobile = $_POST['m_phone'];
 		$match2_mobile = $_POST['m2_phone'];
-		$match2_name = $_POST['m_name'];
+		$match2_name = $_POST['m2_name'];
 		$time = date("Y-m-d H:i:s");
 		$sql = mysqli_query ($db_handle, "UPDATE service_request SET name='$name',mobile='$mobile',requirements='$str2',gender='$gender',timings='$timing',
 											expected_salary='$salary',address='$address',area='$area',remarks='$remarks',match_name='$match_name',

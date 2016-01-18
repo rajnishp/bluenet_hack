@@ -15,7 +15,7 @@ session_start();
 		$lastname = mysqli_real_escape_string($db_handle, $_POST['lastname']);
 		$email = mysqli_real_escape_string($db_handle, $_POST['email']);
 		$phone = mysqli_real_escape_string($db_handle, $_POST['phone']);
-		$employee_type = mysqli_real_escape_string($db_handle, $_POST['employee_type']);
+		//$employee_type = mysqli_real_escape_string($db_handle, $_POST['employee_type']);
 		$pas = mysqli_real_escape_string($db_handle, $_POST['password']) ;
 		$awe = mysqli_real_escape_string($db_handle, $_POST['password2']) ;
 		if((strlen($firstname)< 2) OR (strlen($lastname)< 2) OR (strlen($email)< 8) OR (strlen($phone)< 10) OR (strlen($pas)< 4)) {
@@ -24,8 +24,8 @@ session_start();
 		else {
 			if ( $pas == $awe ) {
 				$pas = md5($pas);
-				mysqli_query($db_handle,"INSERT INTO user(first_name, last_name, email, phone, password, employee_type) 
-													VALUES ('$firstname', '$lastname', '$email', '$phone', '$pas', '$employee_type') ; ") ;		
+				mysqli_query($db_handle,"INSERT INTO user(first_name, last_name, email, phone, password) 
+													VALUES ('$firstname', '$lastname', '$email', '$phone', '$pas') ; ") ;		
 				$user_create_id = mysqli_insert_id($db_handle);
 				
 				if(mysqli_error($db_handle)){ echo "Please Try Again"; } 
