@@ -172,7 +172,7 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 				<span class="menu-title">Follow back Requests</span></a>
 			  </li>
 			  <li><a href="request.php?status=demo">
-				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-sunglasses"></i>
+				<div class="icon-bg bg-blue"></div><i class="glyphicon glyphicon-calendar"></i>
 				<span class="menu-title">In Demo Period</span></a>
 			  </li>
 			  <li><a href="24hour.php">
