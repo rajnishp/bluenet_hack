@@ -219,7 +219,7 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
             ?>
             <div class="col-lg-2"></div>
 			<div class="col-lg-10">
-            <form class="form-horizontal" action="" method="post">
+				<form class="form-horizontal" action="" method="post">
 				    <div class="form-group">
 				      <label class="col-md-3 control-label">Name</label>
 				      <div class="col-md-3">
@@ -337,6 +337,9 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 					    </div>
 				    </div> <!-- /.form-group -->
 				</form>
+				</div>
+				<div class="col-lg-3"></div>
+				<div class="col-lg-5">
 				<ul>
 				<?php
 					$notes = mysqli_query($db_handle, "SELECT * FROM notes WHERE sr_id = '$sr_id'; ") ;
@@ -349,6 +352,7 @@ $db_handle = mysqli_connect("localhost","root","redhat@11111p","bluenethack");
 				?>
 				</ul>
 				<a class='btn btn-success active' data-toggle='modal' data-target='#addNote'>Add Note</a>
+				
     	</div>
         </div>
     </div>
